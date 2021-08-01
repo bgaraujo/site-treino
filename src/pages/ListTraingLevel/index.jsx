@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
 import {
     Fab,
-    Grid
+    Grid,
+    Paper,
+    Typography
 } from "@material-ui/core";
+import { useHistory } from "react-router-dom"
 import AddIcon from "@material-ui/icons/Add";
 import { database } from "../../Firebase/index";
-import TrainingLevelCard from "../../components/TrainingLevelCard";
 
 const ListTraingLevel = () => {
-    const [listTraining, setListTraining ] = useState();
+    const history = useHistory();
+    const [listTraining, setListTraining ] = useState([]);
     useEffect(() => {
         getPosts();
     }, []);
 
     const getPosts = () => {
-        database.ref().child("workouts").get().then((snapshot) => {
+        database.ref().child("trainig").get().then((snapshot) => {
             if (snapshot.exists()) {
                 var arrPosts = snapshot.val();
                 var data = [];
@@ -23,7 +26,7 @@ const ListTraingLevel = () => {
                     data.push(arrPosts[id])
                 }
     
-                setListTraining("data",data);
+                setListTraining(data);
             }
         }).catch((error) => {
             console.error(error);
@@ -33,12 +36,16 @@ const ListTraingLevel = () => {
     return(
         <>
             <Grid container spacing={3}>
-                <Grid item xs={12}>
-                    {/* <TrainingLevelCard/> */}
-                </Grid>
+            {
+                listTraining.map( trainig =>                 <Grid item xs={12}>
+                    <Paper onClick={() => history.push(`/add-levels/${trainig.id}`)} key={trainig.id} elevation={3}>
+                        <Typography variant="body1">{`${trainig.title}: ${trainig.description}`}</Typography>
+                    </Paper>
+                </Grid>)
+            }
             </Grid>
             <Fab
-                //onClick={() => goTo("/add-post")}
+                onClick={() => history.push("/add-levels")}
                 color="primary"
                 className="addButton"
                 aria-label="add">

@@ -4,12 +4,16 @@ import {
 } from "@material-ui/core";
 import "./style.scss";
 
-const ProgressScreen = () => {
+const ProgressScreen = ({progress=''}) => {
     return(
         <div className="ProgressScreen">
             <CircularProgress />
             <div className="savingMessage">
                 <p>Salvando...</p>
+                {
+                    progress!=='' &&
+                    <p>{`${parseInt(progress)} %`}</p>
+                }
             </div>
         </div>
     );

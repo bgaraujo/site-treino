@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
@@ -7,134 +8,80 @@ import {
     Paper,
     Button
 } from "@material-ui/core";
-import CropDialog from "../../components/CropDialog";
 import { storage, database } from "../../Firebase";
 import ProgressScreen from "../../components/ProgressScreen";
 
 const AddTrainigLevel = ({ state }) => {
-    let { id } = useParams();
-    const history = useHistory()
-    const [image, setImage] = useState();
-    const [newImage, setNewImage] = useState();
-    const [saving, setSaving] = useState(false);
-    const [openCropDialog, setOpenCropDialog] = useState(false);
+    const history = useHistory();
 
-    const [blob, setBlob] = useState(null);
+    let { id } = useParams();
+    
+    const [file, setFile] = useState();
+    const [saving, setSaving] = useState(false);
+    const [progress, setProgress] = useState(0);
+    const [fileName, setFileName] = useState();
+
     const [title, setTitle] = useState("");
-    const [summary, setSummary] = useState("");
-    const [text, setText] = useState("");
+    const [description, setDescription] = useState("");
 
     useEffect(() => {
         if (id)
-            ;
-            //getPost(id);
+        getTraining(id);
     }, []);
 
-    // const fileChange = (e) => {
-    //     const file = e.target.files[0]
-    //     const reader = new FileReader()
+    const fileChange = (e) => {
+        setFile(e.target.files[0]);
+    }
 
-    //     reader.addEventListener('load', () => {
-    //         setImage(reader.result);
-    //         setOpenCropDialog(true)
-    //     }, false)
+    const getTraining = (id) => {
+        console.log(id);
+        database.ref().child("trainig").child(id).get().then((snapshot) => {
+            if (snapshot.exists()) {
+                var data = snapshot.val();
+                setTitle(data.title);
+                setDescription(data.description);
+                setFileName(data.video);
 
-    //     if (file) {
-    //         reader.readAsDataURL(file)
-    //     }
-    // }
+                // storage.ref(fileName).getDownloadURL().then(function(videoName) {
+                //     console.log(videoName);
+                // });
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+    }
 
-    // const getPost = (id) => {
-    //     database.ref().child("posts").child(id).get().then((snapshot) => {
-    //         if (snapshot.exists()) {
-    //             var data = snapshot.val();
-    //             setNewImage(data.img);
-    //             setTitle(data.title);
-    //             setSummary(data.summary);
-    //             setText(data.text);
+    const savePost = () => {
+        setSaving(true);
+        const timestamp = new Date().getTime();
+        const videoName = `videos/${timestamp}.mp4`;
+        var uploadTask =  storage.ref().child(videoName).put(file);
 
-    //         }
-    //     }).catch((error) => {
-    //         console.error(error);
-    //     });
-    // }
-
-    // const upload = (callBack) => {
-    //     const name = new Date().getTime();
-    //     const uploadTask = storage.ref(`posts/${name}.jpg`).put(blob);
-    //     uploadTask.on('state_changed', function (snapshot) {
-    //         var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    //         console.log('Upload is ' + progress + '% done');
-    //     }, function (error) {
-    //         // Handle unsuccessful uploads
-    //     }, function () {
-    //         uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-    //             console.log('File available at', downloadURL);
-    //             callBack(downloadURL);
-    //         });
-    //     });
-    // }
-    // const getBlob = (blob) => {
-    //     setBlob(blob)
-    // }
-
-    // const closeDialog = () => {
-    //     setOpenCropDialog(false);
-    //     var reader = new FileReader();
-    //     reader.readAsDataURL(blob);
-    //     reader.onloadend = function () {
-    //         var base64data = reader.result;
-    //         setNewImage(base64data);
-    //     }
-    // }
-
-    // const savePost = () => {
-    //     setSaving(true);
-    //     const timestamp = new Date().getTime();
-
-    //     if (!id) {
-    //         upload((url) => {
-    //             database.ref('posts').push({
-    //                 img: url,
-    //                 title: title,
-    //                 summary: summary,
-    //                 text: text,
-    //                 timestamp: timestamp
-    //             });
-    //             history.goBack();
-    //         });
-    //     } else {
-    //         if (blob) {
-    //             storage.refFromURL(newImage).delete().then(() => {
-    //                 upload((url) => {
-    //                     database.ref('posts/' + id).set({
-    //                         img: url,
-    //                         title: title,
-    //                         summary: summary,
-    //                         text: text,
-    //                         timestamp: timestamp
-    //                     });
-    //                 });
-    //             })
-    //         } else {
-    //             database.ref('posts/' + id).set({
-    //                 img: newImage,
-    //                 title: title,
-    //                 summary: summary,
-    //                 text: text,
-    //                 timestamp: timestamp
-    //             });
-
-    //             history.goBack();
-    //         }
-    //     }
-    // }
+        uploadTask.on('state_changed', function(snapshot){
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            setProgress(progress);
+          }, function(error) {
+            setSaving(false);
+            console.log(error);
+          }, function() {
+            uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                setSaving(false);
+                database.ref('trainig').push({
+                    video: videoName,
+                    title: title,
+                    description: description,
+                    timestamp: timestamp
+                });
+                history.goBack();
+            });
+          });
+    }
 
     return (
         <>
             {
                 saving ?
-                    <ProgressScreen /> :
+                    <ProgressScreen progress={progress}/> :
                     <form noValidate autoComplete="off">
                         <Paper>
                             <Grid container direction="column" >
@@ -143,12 +90,13 @@ const AddTrainigLevel = ({ state }) => {
                                         variant="contained"
                                         component="label"
                                         fullWidth>
-                                        Selecionar video
-                                        {/* <input
+                                            {file?(fileName?fileName:"Video selecionado"):"Selecionar video"}
+                                        <input
                                             type="file"
                                             hidden
+                                            accept="video/mp4,video/x-m4v,video/*"
                                             onChange={fileChange}
-                                        /> */}
+                                        />
                                     </Button>
                                 </Grid>
                                 <Grid item xs={12}>
@@ -156,25 +104,15 @@ const AddTrainigLevel = ({ state }) => {
                                         value={title}
                                         onChange={(e) => setTitle(e.target.value)}
                                         id="standard-basic"
-                                        label="titulo"
+                                        label="Nome"
                                         fullWidth />
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
-                                        value={summary}
-                                        onChange={(e) => setSummary(e.target.value)}
+                                        value={description}
+                                        onChange={(e) => setDescription(e.target.value)}
                                         id="standard-basic"
-                                        label="apresentação"
-                                        fullWidth />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        value={text}
-                                        onChange={(e) => setText(e.target.value)}
-                                        id="standard-basic"
-                                        multiline={true}
-                                        rows="10"
-                                        label="texto"
+                                        label="Descrição"
                                         fullWidth />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -185,7 +123,7 @@ const AddTrainigLevel = ({ state }) => {
                                         onClick={savePost}
                                     >
                                         Salvar
-                            </Button>
+                                    </Button>
                                 </Grid>
                             </Grid>
                         </Paper>
