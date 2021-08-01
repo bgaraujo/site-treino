@@ -1,0 +1,32 @@
+body{
+    margin: 0;
+    background-color: #c8c8c8;
+}
+
+.MuiAppBar-colorPrimary,
+.MuiFab-primary,
+.MuiButton-containedPrimary,
+.MuiButton-containedPrimary:hover{
+    background-color: #000 !important;
+    color: #fff !important;
+    
+    .MuiSvgIcon-root{
+        color: #fff !important;
+    }
+}
+.MuiContainer-root{
+    .MuiPaper-root{
+        padding: 15px;
+    }
+    .MuiCard-root{
+        padding: 0;
+    }
+}
+
+.MuiInput-underline:after{
+    border-bottom-color:#000 !important;
+}
+.MuiFormLabel-root.Mui-focused,
+.MuiCircularProgress-colorPrimary{
+    color: #000 !important;
+}

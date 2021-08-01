@@ -1,0 +1,29 @@
+
+.mobile{
+    @media all and (orientation:landscape) {
+        &.video-container{
+            position: fixed;
+            top: 0;
+            z-index: 9999;
+            height: 100%;
+            width: 100%;
+            left: 0;
+            background-color: #000;
+            video{
+                height: 100%;
+                margin: 0 auto;
+                display: block;
+            }
+        }
+
+    }
+    
+    @media all and (orientation:portrait) {
+        video{
+            width: 100%;
+        }
+    }
+}
+video{
+    width: 100%;
+}
