@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom"
 import AddIcon from "@material-ui/icons/Add";
 import { database } from "../../Firebase/index";
 
-const ListTraingLevel = () => {
+const ListTraingVideos = () => {
     const history = useHistory();
     const [listTraining, setListTraining ] = useState([]);
     useEffect(() => {
@@ -38,14 +38,14 @@ const ListTraingLevel = () => {
             <Grid container spacing={3}>
             {
                 listTraining.map( trainig =>                 <Grid item xs={12}>
-                    <Paper onClick={() => history.push(`/add-levels/${trainig.id}`)} key={trainig.id} elevation={3}>
+                    <Paper onClick={() => history.push(`/add-video/${trainig.id}`)} key={trainig.id} elevation={3}>
                         <Typography variant="body1">{`${trainig.title}: ${trainig.description}`}</Typography>
                     </Paper>
                 </Grid>)
             }
             </Grid>
             <Fab
-                onClick={() => history.push("/add-levels")}
+                onClick={() => history.push("/add-video")}
                 color="primary"
                 className="addButton"
                 aria-label="add">
@@ -55,4 +55,4 @@ const ListTraingLevel = () => {
     )
 }
 
-export default ListTraingLevel;
+export default ListTraingVideos;

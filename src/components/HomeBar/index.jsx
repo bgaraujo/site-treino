@@ -112,11 +112,11 @@ const HomeBar = ({ state }) => {
               </ListItemIcon>
               <ListItemText primary={"Meus Posts"} />
             </ListItem>
-            <ListItem button onClick={() => navigate("/levels")}>
+            <ListItem button onClick={() => navigate("/videos")}>
               <ListItemIcon>
                 <PostAddIcon />
               </ListItemIcon>
-              <ListItemText primary={"Add treino"} />
+              <ListItemText primary={"Add videos"} />
             </ListItem>
           </List>
           {/* Fim admin menu */}

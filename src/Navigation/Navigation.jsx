@@ -17,8 +17,8 @@ import ListPosts from "../pages/ListPosts";
 import ViewPost from "../pages/ViewPost";
 import TrainingList from "../pages/TrainingList";
 import Training from "../pages/Training";
-import ListTraingLevel from "../pages/ListTraingLevel";
-import AddTrainingLevel from "../pages/AddTrainingLevel";
+import ListTraingVideos from "../pages/ListTraingVideos";
+import AddTrainingVideo from "../pages/AddTrainingVideo";
 
 import "./style.scss";
 
@@ -68,14 +68,14 @@ export default function Navigation() {
           <Route path="/training/:level">
             <Training />
           </Route>
-          <Route exact path="/levels">
-            <ListTraingLevel/>
+          <Route exact path="/videos">
+            <ListTraingVideos/>
           </Route>
-          <Route exact path="/add-levels">
-            <AddTrainingLevel/>
+          <Route exact path="/add-video">
+            <AddTrainingVideo/>
           </Route>
-          <Route exact path="/add-levels/:id">
-            <AddTrainingLevel/>
+          <Route exact path="/add-video/:id">
+            <AddTrainingVideo/>
           </Route>
         </Switch>
       </Container>
