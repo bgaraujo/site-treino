@@ -3,11 +3,14 @@ import {
     Fab,
     Grid,
     Paper,
-    Typography
+    Typography,
+    IconButton
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom"
 import AddIcon from "@material-ui/icons/Add";
-import { database } from "../../Firebase/index";
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import { storage, database } from "../../Firebase";
 
 const ListTraingVideos = () => {
     const history = useHistory();
@@ -17,7 +20,7 @@ const ListTraingVideos = () => {
     }, []);
 
     const getPosts = () => {
-        database.ref().child("trainig").get().then((snapshot) => {
+        database.ref().child("videos").get().then((snapshot) => {
             if (snapshot.exists()) {
                 var arrPosts = snapshot.val();
                 var data = [];
@@ -33,13 +36,37 @@ const ListTraingVideos = () => {
         });
     }
 
+    const removePost = id => {
+        database.ref().child("videos").child(id).get().then((snapshot) => {
+            if (snapshot.exists()) {
+                var data = snapshot.val();
+                storage.ref(data.video).delete();
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+        database.ref().child("videos").child(id).remove().then(getPosts());
+    }
+
     return(
         <>
             <Grid container spacing={3}>
             {
-                listTraining.map( trainig =>                 <Grid item xs={12}>
-                    <Paper onClick={() => history.push(`/add-video/${trainig.id}`)} key={trainig.id} elevation={3}>
-                        <Typography variant="body1">{`${trainig.title}: ${trainig.description}`}</Typography>
+                listTraining.map( trainig => <Grid key={trainig.id} item xs={12}>
+                    <Paper elevation={3}>
+                        <Grid container alignItems="center">
+                            <Grid item xs={10}>
+                                <Typography variant="body1">{`${trainig.title}: ${trainig.description}`}</Typography>
+                            </Grid>
+                            <Grid item xs={2}>
+                                <IconButton color="primary" aria-label="upload picture" component="span" onClick={() => history.push(`/add-video/${trainig.id}`)}>
+                                    <EditIcon />
+                                </IconButton>
+                                <IconButton color="primary" aria-label="upload picture" component="span" onClick={() => removePost(trainig.id)}>
+                                    <DeleteIcon />
+                                </IconButton>
+                            </Grid>
+                        </Grid>
                     </Paper>
                 </Grid>)
             }

@@ -36,7 +36,7 @@ const AddTrainingVideo = ({ state }) => {
     }
 
     const getTraining = (id) => {
-        database.ref().child("trainig").child(id).get().then((snapshot) => {
+        database.ref().child("videos").child(id).get().then((snapshot) => {
             if (snapshot.exists()) {
                 var data = snapshot.val();
                 setTitle(data.title);
@@ -54,9 +54,9 @@ const AddTrainingVideo = ({ state }) => {
 
     const saveData = post => {
         if(id)
-            database.ref('trainig').child(id).update(post);
+            database.ref('videos').child(id).update(post);
         else
-            database.ref('trainig').push(post);
+            database.ref('videos').push(post);
     }
 
     const savePost = () => {
@@ -65,7 +65,7 @@ const AddTrainingVideo = ({ state }) => {
         const videoName = `videos/${timestamp}.mp4`;
         
         if(file){ 
-            storage.ref(fileName).delete();
+            if(fileName) storage.ref(fileName).delete();
     
             var uploadTask =  storage.ref().child(videoName).put(file);
             uploadTask.on('state_changed', function(snapshot){
