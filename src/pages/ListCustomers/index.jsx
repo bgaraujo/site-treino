@@ -7,7 +7,7 @@ import CardUser from "../../components/CardUser";
 import { database } from "../../Firebase/index";
 
 
-const ListClientToAddRating = ({state}) => {
+const ListCustomers = ({state}) => {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
@@ -37,7 +37,6 @@ const ListClientToAddRating = ({state}) => {
         <Grid
             container
             justify="center"
-            className="ListClientToAddRating"
             spacing={3}
         >
             {
@@ -51,4 +50,4 @@ const ListClientToAddRating = ({state}) => {
     );
 }
 
-export default connect(state => ({state:state})) (ListClientToAddRating);
+export default connect(state => ({state:state})) (ListCustomers);

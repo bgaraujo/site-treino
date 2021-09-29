@@ -103,7 +103,7 @@ const AddTrainingVideo = ({ state }) => {
                     <ProgressScreen progress={progress}/> :
                     <form noValidate autoComplete="off">
                         <Paper>
-                            <Grid container direction="column" >
+                            <Grid container direction="column" spacing={3}>
                                 <Grid item xs={12}>
                                     <Button
                                         variant="contained"

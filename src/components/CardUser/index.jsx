@@ -41,12 +41,8 @@ export default function CardUser( {user} ) {
   const nascimento = new Date(user.birthdate);
   const date = new Date();
 
-  const goTo = (href) => {
-    history.push("/list-client-rating/"+user.uuid);
-  }
-
   return (
-    <Card className={classes.root} onClick={goTo}>
+    <Card className={classes.root} onClick={() => history.push("/manage-customer/"+user.uuid)}>
       <CardMedia
         className={classes.cover}
         image={profilePic}

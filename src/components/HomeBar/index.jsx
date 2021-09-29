@@ -78,9 +78,7 @@ const HomeBar = ({ state }) => {
               </IconButton>
           }
 
-          <Typography variant="h6">
-            Treinos
-              </Typography>
+          <Typography variant="h6" onClick={() => history.replace("/")}>Cantinho da saúde</Typography>
 
         </Toolbar>
       </AppBar>
@@ -100,11 +98,11 @@ const HomeBar = ({ state }) => {
           <Divider />
           {/* Admin menu */}
           <List>
-            <ListItem button onClick={() => navigate("/list-client-rating")}>
+            <ListItem button onClick={() => navigate("/list-customers")}>
               <ListItemIcon>
                 <BarChartIcon />
               </ListItemIcon>
-              <ListItemText primary={"Salvar parciais mensais"} />
+              <ListItemText primary={"Meus Alunos"} />
             </ListItem>
             <ListItem button onClick={() => navigate("/posts")}>
               <ListItemIcon>

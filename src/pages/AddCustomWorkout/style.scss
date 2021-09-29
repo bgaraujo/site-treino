@@ -1,0 +1,16 @@
+.AddCustomWorkout{
+    .margin-botton{
+        margin-bottom: 15px;
+    }
+    .table-place{
+        margin: 15px 0;
+        overflow-x: scroll;
+        .MuiTableCell-root{
+            padding: 0 10px;
+            .MuiInputBase-input{
+                padding: 10px 0;
+                text-align: center;
+            }
+        }
+    }
+}

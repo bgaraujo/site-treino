@@ -8,7 +8,7 @@ import Container from "@material-ui/core/Container";
 import HomeBar from "../components/HomeBar";
 import Home from "../pages/home";
 import Profile from "../pages/Profile";
-import ListClientToAddRating from "../pages/ListClientToAddRating";
+import ListCustomers from "../pages/ListCustomers";
 import MyEvolution from "../pages/MyEvolution";
 import MyRatingsList from "../pages/MyRatingsList";
 import AddCustomerRating from "../pages/AddCustomerRating";
@@ -19,6 +19,9 @@ import TrainingList from "../pages/TrainingList";
 import Training from "../pages/Training";
 import ListTraingVideos from "../pages/ListTraingVideos";
 import AddTrainingVideo from "../pages/AddTrainingVideo";
+import ManageCustomer from "../pages/ManageCustomer";
+import CustomWorkoutList from "../pages/CustomWorkoutList";
+import AddCustomWorkout from "../pages/AddCustomWorkout";
 
 import "./style.scss";
 
@@ -34,19 +37,25 @@ export default function Navigation() {
           <Route exact path="/profile">
             <Profile />
           </Route>
-          <Route exact path="/list-client-rating">
-            <ListClientToAddRating />
+          <Route exact path="/list-customers">
+            <ListCustomers />
+          </Route>
+          <Route exact path="/manage-customer">
+            <ManageCustomer />
+          </Route>
+          <Route exact path="/manage-customer/:uuid">
+            <ManageCustomer />
           </Route>
           <Route exact path="/my-evolution">
             <MyEvolution />
           </Route>
-          <Route exact path="/list-client-rating/:uuid">
+          <Route exact path="/manage-customer/list-client-rating/:uuid">
             <MyRatingsList />
           </Route>
-          <Route path="/list-client-rating/add-rating/:uuid/:id">
+          <Route path="/manage-customer/list-client-rating/add-rating/:uuid/:id">
             <AddCustomerRating />
           </Route>
-          <Route path="/list-client-rating/add-rating/:uuid">
+          <Route path="/manage-customer/list-client-rating/add-rating/:uuid">
             <AddCustomerRating />
           </Route>
 
@@ -62,11 +71,17 @@ export default function Navigation() {
           <Route path="/post/:id">
             <ViewPost />
           </Route>
-          <Route exact path="/training">
+          {/* <Route exact path="/training">
             <TrainingList />
           </Route>
           <Route path="/training/:level">
             <Training />
+          </Route> */}
+          <Route exact path="/manage-customer/custom-workout-list/:uuid">
+            <CustomWorkoutList/>
+          </Route>
+          <Route exact path="/manage-customer/custom-workout-list/add-custom-workout/:uuid">
+            <AddCustomWorkout />
           </Route>
           <Route exact path="/videos">
             <ListTraingVideos/>

@@ -11,6 +11,7 @@ import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { storage, database } from "../../Firebase";
+import "./style.scss";
 
 const ListTraingVideos = () => {
     const history = useHistory();
@@ -37,6 +38,7 @@ const ListTraingVideos = () => {
     }
 
     const removePost = id => {
+        if(!window.confirm("Tem certeza?")) return;
         database.ref().child("videos").child(id).get().then((snapshot) => {
             if (snapshot.exists()) {
                 var data = snapshot.val();
@@ -50,7 +52,7 @@ const ListTraingVideos = () => {
 
     return(
         <>
-            <Grid container spacing={3}>
+            <Grid container spacing={3} className="list-traing-videos">
             {
                 listTraining.map( trainig => <Grid key={trainig.id} item xs={12}>
                     <Paper elevation={3}>
@@ -58,7 +60,7 @@ const ListTraingVideos = () => {
                             <Grid item xs={10}>
                                 <Typography variant="body1">{`${trainig.title}: ${trainig.description}`}</Typography>
                             </Grid>
-                            <Grid item xs={2}>
+                            <Grid item xs={2} className="action-buttons">
                                 <IconButton color="primary" aria-label="upload picture" component="span" onClick={() => history.push(`/add-video/${trainig.id}`)}>
                                     <EditIcon />
                                 </IconButton>

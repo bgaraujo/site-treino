@@ -1,0 +1,27 @@
+.manage-customer{
+    .header-profile{
+        padding: 15px;
+        background-image: linear-gradient(#000, #494949);
+        border-radius: 5px;
+        .profile-pic{
+            width: 20vh;
+            height: 20vh;
+        }
+    }
+    .profile-name{
+        .MuiFab-extended{
+            height: 32px;
+        }
+        .MuiFab-label{
+            font-size: 0.7rem;
+        }
+        margin-top: -25px;
+    }
+    .weight-box{
+        span{
+            margin-top: 5px;
+            font-size: 0.5rem;
+            display: block;
+        }
+    }
+}

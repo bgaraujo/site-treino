@@ -1,6 +1,7 @@
 body{
     margin: 0;
     background-color: #c8c8c8;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
 .MuiAppBar-colorPrimary,
@@ -26,6 +27,7 @@ body{
 .MuiInput-underline:after{
     border-bottom-color:#000 !important;
 }
+.MuiIconButton-colorPrimary,
 .MuiFormLabel-root.Mui-focused,
 .MuiCircularProgress-colorPrimary{
     color: #000 !important;

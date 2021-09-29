@@ -1,0 +1,22 @@
+.TrainingCard{
+    display: flex;
+    .MuiCardMedia-root{
+        width: 90px,
+    }
+    .MuiCardContent-root{
+        h4{
+            width: 100%;
+            margin: 10px 0;
+        }
+        p{
+            margin: 0 0 8px 0;
+        }
+        span{
+            width: 100%;
+            font-size: 10px;
+        }
+        display: 'flex';
+        flex-direction: column;
+        cursor: pointer;
+    }
+}
