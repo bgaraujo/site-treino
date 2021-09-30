@@ -42,6 +42,7 @@ const CustomWorkoutList = () => {
                                 img={workout.imageURL}
                                 name={workout.name}
                                 description={workout.description}
+                                percent={workout.selectedWorkouts.length}
                             />
                         </Grid>
                     )

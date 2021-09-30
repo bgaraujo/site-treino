@@ -1,0 +1,61 @@
+.CustomWorkout{
+    flex-wrap: nowrap !important;
+    .MuiGrid-root{
+        z-index: 1;
+        &[justifycontent="space-between"]{
+            justify-content: space-between;
+        }
+    }
+    .bgPost{
+        width: 100%;
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        margin-top: 48px;
+        z-index: 0;
+        -webkit-filter: blur(2px); /* Safari 6.0 - 9.0 */
+        filter: blur(2px);
+    }
+    .header{   
+        background-color: rgb(255 255 255 / 30%);
+        padding: 15px;
+        border-radius: 4px;
+    }
+    .video{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    h1{
+        font-size: 2.7ch;
+        margin: 0 0 10px 0;
+    }
+    p{
+        margin: 0 0 10px 0;
+        font-size: 1.5ch;
+        &.caption{
+            color: #969696;
+            font-size: 1.2ch;
+        }
+        .MuiSvgIcon-root{
+            color: #009a36;
+            font-size: 1rem;
+            vertical-align: text-top;
+        }
+    }
+    .videoFrame{
+        aspect-ratio: 16 / 9;
+        background-color: #4e4e4e;
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        .MuiSvgIcon-root{
+            margin: 0 auto;
+            color: #fff;
+            font-size: 7ch;
+        }
+    }
+    .MuiAlert-root{
+        padding: 0px 10px !important;
+    }
+    
+}

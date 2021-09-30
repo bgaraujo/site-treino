@@ -20,6 +20,8 @@ import AddTrainingVideo from "../pages/AddTrainingVideo";
 import ManageCustomer from "../pages/ManageCustomer";
 import CustomWorkoutList from "../pages/CustomWorkoutList";
 import AddCustomWorkout from "../pages/AddCustomWorkout";
+import CustomWorkout from "../pages/CustomWorkout";
+import TrainingList from "../pages/TrainingList";
 
 import "./style.scss";
 
@@ -56,7 +58,6 @@ export default function Navigation() {
           <Route path="/manage-customer/list-client-rating/add-rating/:uuid">
             <AddCustomerRating />
           </Route>
-
           <Route exact path="/add-post">
             <AddPost />
           </Route>
@@ -69,9 +70,10 @@ export default function Navigation() {
           <Route path="/post/:id">
             <ViewPost />
           </Route>
-          {/* <Route exact path="/training">
+          <Route exact path="/training">
             <TrainingList />
           </Route>
+          {/* 
           <Route path="/training/:level">
             <Training />
           </Route> */}
@@ -83,6 +85,9 @@ export default function Navigation() {
           </Route>
           <Route exact path="/manage-customer/custom-workout-list/add-custom-workout/:uuid/:workoutid">
             <AddCustomWorkout />
+          </Route>
+          <Route exact path="/custom-workout/:workoutid">
+            <CustomWorkout />
           </Route>
           <Route exact path="/videos">
             <ListTraingVideos/>

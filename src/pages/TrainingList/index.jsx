@@ -1,55 +1,51 @@
-import React from "react";
-import {
-    Grid
-} from "@material-ui/core";
-import TrainingLevelCard from "../../components/TrainingLevelCard";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from 'react';
+import { connect } from "react-redux";
+import { Grid } from '@material-ui/core';
+import TrainingCard from '../../components/TrainingCard';
+import { database } from "../../Firebase";
 
-const TrainingList = () => {
+const TrainingList = ({state}) => {
+    console.log(state);
+    let uuid = state.userID;
 
-    const level = [
-        {
-            "title": "Nível 1",
-            "text": "Neste level vamos começar a sentir os treinos e como estamos fisicamente e nosso compromisso com o treino",
-            "level": 1,
-            "movie":"level1.mp4",
-            "times":[
-                {
-                  value: 0,
-                  label: 'Aquecimento',
-                },
-                {
-                  value: 20,
-                  label: 'Inicio do treino',
-                },
-                {
-                  value: 37,
-                  label: 'Pega fogo',
-                },
-                {
-                  value: 90,
-                  label: 'hora de dar tchau',
-                },
-            ]
-        },
-        {
-            "title": "Nível 2",
-            "text": "Aqui vamos pegar um pouco mais pesado, criar resistencia e melhorar a força",
-            "level": 2
-        },
-    ];
-    return (
-        <Grid
-            container
-            spacing={2}
-        >
-            {
-                level.map((level, key) => <Grid item key={key} xs={12} md={4}>
-                    <TrainingLevelCard level={level} />
-                </Grid>)
+    const[workouts, setWorkout] = useState([])
+
+    const getData = () => {
+        database.ref().child(`users/${uuid}/workout`).get().then((data) => {
+            if(data.exists()){
+                const arrData = data.val();
+                var  arrWorkout = [];
+                for (var id in arrData) {
+                    arrData[id].id = id;
+                    arrWorkout.push(arrData[id])
+                }
+                console.log(arrWorkout)
+                setWorkout(arrWorkout)
             }
+        })
+    }
 
+    useEffect( () => {
+        getData();
+    }, [])
+
+    return (
+        <Grid container spacing={2}>
+            {
+                workouts.map( workout =>  
+                    <Grid key={workout.id} item xs={12}>
+                        <TrainingCard 
+                            href={`/custom-workout/${workout.id}`}
+                            img={workout.imageURL}
+                            name={workout.name}
+                            description={workout.description}
+                        />
+                    </Grid>
+                )
+            }
         </Grid>
     );
 }
 
-export default TrainingList;
+export default connect(state => ({state:state}) )(TrainingList);

@@ -48,7 +48,6 @@ const AddCustomWorkout = () => {
     uploadTask.on('state_changed', function(snapshot){
         var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log(progress);
-        //setProgress(progress);
     }, function(error) {
         console.log(error);
     }, function() {
@@ -67,11 +66,10 @@ const AddCustomWorkout = () => {
       imageURL:downloadURL != null ? downloadURL : imageURL
     };
 
-    console.log(downloadURL,workout)
-    if(workoutid)
-        database.ref(`users`).child(`${uuid}/workout`).child(workoutid).update(workout).finally(() => history.goBack());
+    if(workoutid !== undefined)
+        database.ref(`users`).child(`${uuid}/workout`).child(workoutid).update(workout).then(() => history.goBack());
     else
-        database.ref(`users`).child(`${uuid}/workout`).push(workout).finally(() => history.goBack());
+        database.ref(`users`).child(`${uuid}/workout`).push(workout).then(() => history.goBack());
   }
 
   const handleSubmit = () => {
@@ -133,7 +131,6 @@ const AddCustomWorkout = () => {
   const getWorkouts = () => {
     database.ref().child(`users/${uuid}/workout`).child(workoutid).get().then((data) => {
       if(data.exists()){
-          console.log()
           const workout = data.val();
           setName(workout.name);
           setDescription(workout.description);
@@ -146,7 +143,7 @@ const AddCustomWorkout = () => {
 
   useEffect(() => {
     getPosts();
-    if(getWorkouts) getWorkouts();
+    if(workoutid) getWorkouts();
   },[ ]);
 
   return (
