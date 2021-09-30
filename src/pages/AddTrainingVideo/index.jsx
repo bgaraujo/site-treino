@@ -119,7 +119,7 @@ const AddTrainingVideo = ({ state }) => {
                                     </Button>
                                 </Grid>
                                 <Grid item xs={12}>
-                                { videoSrc != "" &&
+                                { videoSrc !== "" &&
                                     <video controls name="media">
                                         <source src={videoSrc} type="video/mp4" />
                                     </video>

@@ -15,8 +15,6 @@ import AddCustomerRating from "../pages/AddCustomerRating";
 import AddPost from "../pages/AddPost";
 import ListPosts from "../pages/ListPosts";
 import ViewPost from "../pages/ViewPost";
-import TrainingList from "../pages/TrainingList";
-import Training from "../pages/Training";
 import ListTraingVideos from "../pages/ListTraingVideos";
 import AddTrainingVideo from "../pages/AddTrainingVideo";
 import ManageCustomer from "../pages/ManageCustomer";
@@ -81,6 +79,9 @@ export default function Navigation() {
             <CustomWorkoutList/>
           </Route>
           <Route exact path="/manage-customer/custom-workout-list/add-custom-workout/:uuid">
+            <AddCustomWorkout />
+          </Route>
+          <Route exact path="/manage-customer/custom-workout-list/add-custom-workout/:uuid/:workoutid">
             <AddCustomWorkout />
           </Route>
           <Route exact path="/videos">

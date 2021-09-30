@@ -1,6 +1,16 @@
 .AddCustomWorkout{
+    img{
+        width: 70%;
+        margin: 0 15%;
+    }
     .margin-botton{
         margin-bottom: 15px;
+    }
+    thead{
+        background-color: #000;
+        .MuiTableCell-head{
+            color: #fff;
+        }
     }
     .table-place{
         margin: 15px 0;

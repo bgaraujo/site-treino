@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect } from 'react';
 import { 
   TextField, 
@@ -18,17 +20,84 @@ import {
   ListItemText,
 } from '@material-ui/core';
 import "./style.scss";
-import { database } from "../../Firebase";
-import Training from '../Training';
+import { useHistory, useParams } from "react-router-dom";
+import { database, storage } from "../../Firebase";
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import SaveIcon from '@material-ui/icons/Save';
 
 const AddCustomWorkout = () => {
+  const history = useHistory();
+
+  let { uuid, workoutid } = useParams();
+
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [selectedWorkouts, setSelectedWorkouts] = useState([]);
+  const [file, setFile] = useState();
+  const [image, setImage] = useState();
+  const [imageURL, setImageURL] = useState();
 
   const [showDialog, setShowDialog] = useState(false);
   const [trainingList, setTrainingList] = useState([]);
+
+
+
+  const uploadImg = (callback) => {
+    var uploadTask =  storage.ref().child(image).put(file);
+    uploadTask.on('state_changed', function(snapshot){
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log(progress);
+        //setProgress(progress);
+    }, function(error) {
+        console.log(error);
+    }, function() {
+        uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+          callback && callback(downloadURL);
+        });
+    });
+  }
+
+  const saveData = downloadURL => {
+    const workout = {
+      name:name,
+      description:description,
+      selectedWorkouts:selectedWorkouts,
+      image:image,
+      imageURL:downloadURL != null ? downloadURL : imageURL
+    };
+
+    console.log(downloadURL,workout)
+    if(workoutid)
+        database.ref(`users`).child(`${uuid}/workout`).child(workoutid).update(workout).finally(() => history.goBack());
+    else
+        database.ref(`users`).child(`${uuid}/workout`).push(workout).finally(() => history.goBack());
+  }
+
+  const handleSubmit = () => {
+    if(file) uploadImg(
+      (downloadURL) => {
+        saveData(downloadURL);
+      }
+    );
+    else
+      saveData();
+  }
+
+  const fileChange = e => {
+    if(e.target.files.length === 0)return;
+    const timestamp =  new Date().getTime();
+
+    setFile(e.target.files[0]);
+    setImageURL(URL.createObjectURL(e.target.files[0]));
+    setImage(`workout/${timestamp+"."+e.target.files[0].name.split('.').pop()}`)
+  }
+
+  const updateSelectedWorkouts = (id, name, value) => {
+    const index = selectedWorkouts.findIndex((workout => workout.id === id));
+    selectedWorkouts[index][name] = value;
+    setSelectedWorkouts([...selectedWorkouts]);
+  }
 
   const addsElementToTraining = (id) => {
     setShowDialog(false);
@@ -37,11 +106,12 @@ const AddCustomWorkout = () => {
 
     selectedWorkouts.push({
       id:id,
-      repetitions:0,
+      repetitions:"",
       break:"",
-      note:""
+      note:"",
+      done:false
     });
-    setSelectedWorkouts(selectedWorkouts);
+    setSelectedWorkouts([...selectedWorkouts]);
   }
 
   const getPosts = () => {
@@ -60,14 +130,47 @@ const AddCustomWorkout = () => {
     });
   }
 
+  const getWorkouts = () => {
+    database.ref().child(`users/${uuid}/workout`).child(workoutid).get().then((data) => {
+      if(data.exists()){
+          console.log()
+          const workout = data.val();
+          setName(workout.name);
+          setDescription(workout.description);
+          setImage(workout.image);
+          setImageURL(workout.imageURL);
+          setSelectedWorkouts(workout.selectedWorkouts);
+      }
+  })
+  }
+
   useEffect(() => {
     getPosts();
-  },[]);
+    if(getWorkouts) getWorkouts();
+  },[ ]);
 
   return (
     <>
       <Paper elevation={3} className="AddCustomWorkout">
         <h3>Criando treino</h3>
+        {
+          imageURL && <img src={imageURL} alt="teste" />
+        }
+        <Button
+            variant="contained"
+            component="label"
+            size="small"
+            className="margin-botton"
+            startIcon={<CloudUploadIcon />}
+            fullWidth>
+            Capa
+            <input
+                type="file"
+                hidden
+                accept="image/png, image/gif, image/jpeg"
+                onChange={fileChange}
+            />
+        </Button>
 
         <TextField 
           fullWidth 
@@ -102,22 +205,43 @@ const AddCustomWorkout = () => {
                       {found.title}
                     </TableCell>
                     <TableCell>
-                      <TextField variant="outlined" value={workout.repetitions}/>
+                      <TextField 
+                        variant="outlined"
+                        value={workout.repetitions}
+                        onChange={e => updateSelectedWorkouts(workout.id,"repetitions",e.target.value)}
+                        />
                     </TableCell>
                     <TableCell>
-                      <TextField variant="outlined" value={workout.break}/>
+                      <TextField 
+                        variant="outlined" 
+                        value={workout.break}
+                        onChange={e => updateSelectedWorkouts(workout.id,"break",e.target.value)}
+                      />
                     </TableCell>
                     <TableCell>
-                      <TextField variant="outlined" value={workout.note}/>
+                      <TextField 
+                        variant="outlined" 
+                        value={workout.note}
+                        onChange={e => updateSelectedWorkouts(workout.id,"note",e.target.value)}
+                      />
                     </TableCell>
                   </TableRow>
                 })
               }
               
             </TableBody>
-            <caption><Button variant="outlined" onClick={() => setShowDialog(true)}>Add +</Button></caption>
           </Table>
+          <Button variant="outlined" onClick={() => setShowDialog(true)}>Add +</Button>
         </div>
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          onClick={handleSubmit}
+          startIcon={<SaveIcon />}
+        >
+          Salvar treino
+        </Button>
       </Paper>
       <Dialog
         open={showDialog}
