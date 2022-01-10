@@ -14,6 +14,13 @@ body{
     .MuiSvgIcon-root{
         color: #fff !important;
     }
+    
+}
+.MuiButton-contained{
+    &.error-theme{
+        background-color: rgb(211, 47, 47) !important;
+        color: #fff !important;
+    }
 }
 .MuiContainer-root{
     .MuiPaper-root{

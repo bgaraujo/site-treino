@@ -108,7 +108,7 @@ const CustomWorkout = ({state}) => {
                   {
                     workout.detail && 
                     <>
-                      <Grid container direction="row" justifyContent="space-between">
+                      <Grid container direction="row" className="card-header">
                         <Grid item>
                           <h1>{workout.detail.title}</h1>
                         </Grid>

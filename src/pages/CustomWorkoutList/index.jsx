@@ -42,8 +42,11 @@ const CustomWorkoutList = () => {
                                 img={workout.imageURL}
                                 name={workout.name}
                                 description={workout.description}
-                                percent={workout.selectedWorkouts.length}
+                                percent={
+                                    (workout.selectedWorkouts.filter( (workout) => { return workout.done === true}).length * 100)/workout.selectedWorkouts.length
+                                }
                             />
+                                
                         </Grid>
                     )
                 }

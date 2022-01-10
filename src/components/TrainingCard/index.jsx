@@ -3,9 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { Card, CardContent, Grid, CardMedia } from '@material-ui/core';
 import "./style.scss";
 
-export default function TrainingCard({href, img, name, description}) {
+export default function TrainingCard({href, img, name, description, percent}) {
   const history = useHistory();
-
 
   return (
     <Card className="TrainingCard" onClick={() => history.push(href)}>
@@ -17,7 +16,7 @@ export default function TrainingCard({href, img, name, description}) {
         <Grid container>
           <h4>{name}</h4>
           <p>{description}</p>
-          <span>50% concluido</span>
+          <span>{percent.toFixed(1)}% concluido</span>
         </Grid>
       </CardContent>
     </Card>

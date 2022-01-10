@@ -20,7 +20,6 @@ const TrainingList = ({state}) => {
                     arrData[id].id = id;
                     arrWorkout.push(arrData[id])
                 }
-                console.log(arrWorkout)
                 setWorkout(arrWorkout)
             }
         })
@@ -40,6 +39,9 @@ const TrainingList = ({state}) => {
                             img={workout.imageURL}
                             name={workout.name}
                             description={workout.description}
+                            percent={
+                                (workout.selectedWorkouts.filter( (workout) => { return workout.done === true}).length * 100)/workout.selectedWorkouts.length
+                            }
                         />
                     </Grid>
                 )

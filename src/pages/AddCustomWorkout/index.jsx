@@ -18,6 +18,7 @@ import {
   ListItemAvatar,
   Avatar,
   ListItemText,
+  Grid,
 } from '@material-ui/core';
 import "./style.scss";
 import { useHistory, useParams } from "react-router-dom";
@@ -25,6 +26,7 @@ import { database, storage } from "../../Firebase";
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import SaveIcon from '@material-ui/icons/Save';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const AddCustomWorkout = () => {
   const history = useHistory();
@@ -41,7 +43,11 @@ const AddCustomWorkout = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [trainingList, setTrainingList] = useState([]);
 
-
+  const remove = () => {
+    storage.ref().child(image).delete().then(() => {
+      database.ref(`users`).child(`${uuid}/workout`).child(workoutid).remove().then(() => history.goBack())
+    })
+  }
 
   const uploadImg = (callback) => {
     var uploadTask =  storage.ref().child(image).put(file);
@@ -230,15 +236,30 @@ const AddCustomWorkout = () => {
           </Table>
           <Button variant="outlined" onClick={() => setShowDialog(true)}>Add +</Button>
         </div>
-        <Button
-          variant="contained"
-          color="primary"
-          size="small"
-          onClick={handleSubmit}
-          startIcon={<SaveIcon />}
-        >
-          Salvar treino
-        </Button>
+
+        <Grid container direction="row" className="card-header">
+          <Grid item>
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              onClick={handleSubmit}
+              startIcon={<SaveIcon />}
+            >
+              Salvar treino
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button 
+              variant="contained"
+              startIcon={<DeleteIcon />}
+              size="small"
+              onClick={remove}
+              className="error-theme"
+            >Remove</Button>
+          </Grid>
+        </Grid>
+                  
       </Paper>
       <Dialog
         open={showDialog}

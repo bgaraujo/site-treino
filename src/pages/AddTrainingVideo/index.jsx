@@ -15,7 +15,7 @@ const AddTrainingVideo = ({ state }) => {
     const history = useHistory();
 
     let { id } = useParams();
-    
+
     const [file, setFile] = useState();
     const [saving, setSaving] = useState(false);
     const [progress, setProgress] = useState(0);
@@ -63,10 +63,9 @@ const AddTrainingVideo = ({ state }) => {
         setSaving(true);
         const timestamp = new Date().getTime();
         const videoName = `videos/${timestamp}.mp4`;
-        
-        if(file){ 
+
+        if(file){
             if(fileName) storage.ref(fileName).delete();
-    
             var uploadTask =  storage.ref().child(videoName).put(file);
             uploadTask.on('state_changed', function(snapshot){
                 var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;

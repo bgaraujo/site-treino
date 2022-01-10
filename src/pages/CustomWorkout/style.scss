@@ -2,7 +2,7 @@
     flex-wrap: nowrap !important;
     .MuiGrid-root{
         z-index: 1;
-        &[justifycontent="space-between"]{
+        .card-header{
             justify-content: space-between;
         }
     }
