@@ -16,7 +16,7 @@ export default function TrainingCard({href, img, name, description, percent}) {
         <Grid container>
           <h4>{name}</h4>
           <p>{description}</p>
-          <span>{percent.toFixed(1)}% concluido</span>
+          <span>{parseInt(percent)}% concluido</span>
         </Grid>
       </CardContent>
     </Card>

@@ -18,8 +18,8 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import TodayIcon from '@material-ui/icons/Today';
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
-import RestaurantIcon from '@material-ui/icons/Restaurant';
-import PaymentIcon from '@material-ui/icons/Payment';
+// import RestaurantIcon from '@material-ui/icons/Restaurant';
+// import PaymentIcon from '@material-ui/icons/Payment';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import BarChartIcon from '@material-ui/icons/BarChart';
@@ -116,6 +116,12 @@ const HomeBar = ({ state }) => {
               </ListItemIcon>
               <ListItemText primary={"Add videos"} />
             </ListItem>
+            <ListItem button onClick={() => navigate("/add-event-list")}>
+              <ListItemIcon>
+                <PostAddIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Add Eventos"} />
+            </ListItem>
           </List>
           {/* Fim admin menu */}
           <Divider />
@@ -126,7 +132,7 @@ const HomeBar = ({ state }) => {
               </ListItemIcon>
               <ListItemText primary={"Minha evolução"} />
             </ListItem>
-            <ListItem button>
+            <ListItem button onClick={() => navigate("/calendar")}>
               <ListItemIcon>
                 <TodayIcon />
               </ListItemIcon>
@@ -138,18 +144,18 @@ const HomeBar = ({ state }) => {
               </ListItemIcon>
               <ListItemText primary={"Treinos"} />
             </ListItem>
-            <ListItem button>
+            {/* <ListItem button>
               <ListItemIcon>
                 <RestaurantIcon />
               </ListItemIcon>
               <ListItemText primary={"Alimentação"} />
-            </ListItem>
-            <ListItem button>
+            </ListItem> */}
+            {/* <ListItem button>
               <ListItemIcon>
                 <PaymentIcon />
               </ListItemIcon>
               <ListItemText primary={"Proximo pagametno"} />
-            </ListItem>
+            </ListItem> */}
             <Divider />
             <ListItem button onClick={signOut}>
               <ListItemIcon >

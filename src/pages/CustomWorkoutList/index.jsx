@@ -35,9 +35,9 @@ const CustomWorkoutList = () => {
         <>
             <Grid container spacing={2}>
                 {
-                    workouts.map( workout =>  
+                    workouts.map( workout =>
                         <Grid key={workout.id} item xs={12}>
-                            <TrainingCard 
+                            <TrainingCard
                                 href={`add-custom-workout/${uuid}/${workout.id}`}
                                 img={workout.imageURL}
                                 name={workout.name}
@@ -46,7 +46,6 @@ const CustomWorkoutList = () => {
                                     (workout.selectedWorkouts.filter( (workout) => { return workout.done === true}).length * 100)/workout.selectedWorkouts.length
                                 }
                             />
-                                
                         </Grid>
                     )
                 }

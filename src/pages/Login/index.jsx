@@ -19,7 +19,7 @@ const Login = ({state}) => {
     const login = () => {
         auth.signInWithEmailAndPassword(email,password).catch(function(error) {
             setError(error.message);
-        }); 
+        });
     }
 
     const navigate = (href) => {
@@ -28,7 +28,6 @@ const Login = ({state}) => {
 
     return(
             <div className="flexContainer">
-                
                 <div className="flexItem">
                     <div className="margin">
                         <FitnessCenterIcon className="margin" fontSize="large"/>
@@ -68,7 +67,6 @@ const Login = ({state}) => {
                         </div>
                     </form>
                 </div>
-                
             </div>
     );
 }

@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { 
-    Grid
+import { useHistory } from "react-router-dom";
+import {
+    Grid,
+    Fab
  } from "@material-ui/core";
 import CardUser from "../../components/CardUser";
+import AddIcon from "@material-ui/icons/Add";
 import { database } from "../../Firebase/index";
 
 
 const ListCustomers = ({state}) => {
+    const history = useHistory();
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
@@ -40,12 +44,19 @@ const ListCustomers = ({state}) => {
             spacing={3}
         >
             {
-                users.map(user => 
+                users.map(user =>
                     <Grid key={user.uuid} item xs={12} md={6}>
                         <CardUser user={user} />
                     </Grid>
                 )
             }
+            <Fab
+                onClick={() =>  history.push("/add-customer")}
+                color="primary"
+                className="addButton"
+                aria-label="add">
+                <AddIcon />
+            </Fab>
         </Grid>
     );
 }

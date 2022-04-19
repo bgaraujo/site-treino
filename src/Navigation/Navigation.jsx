@@ -9,6 +9,7 @@ import HomeBar from "../components/HomeBar";
 import Home from "../pages/home";
 import Profile from "../pages/Profile";
 import ListCustomers from "../pages/ListCustomers";
+import AddCustomer from "../pages/AddCustomer";
 import MyEvolution from "../pages/MyEvolution";
 import MyRatingsList from "../pages/MyRatingsList";
 import AddCustomerRating from "../pages/AddCustomerRating";
@@ -22,6 +23,9 @@ import CustomWorkoutList from "../pages/CustomWorkoutList";
 import AddCustomWorkout from "../pages/AddCustomWorkout";
 import CustomWorkout from "../pages/CustomWorkout";
 import TrainingList from "../pages/TrainingList";
+import Calendar from "../pages/Calendar";
+import ListEvents from "../pages/ListEvents";
+import AddEvents from "../pages/AddEvents";
 
 import "./style.scss";
 
@@ -39,6 +43,9 @@ export default function Navigation() {
           </Route>
           <Route exact path="/list-customers">
             <ListCustomers />
+          </Route>
+          <Route exact path="/add-customer">
+            <AddCustomer />
           </Route>
           <Route exact path="/manage-customer">
             <ManageCustomer />
@@ -70,13 +77,12 @@ export default function Navigation() {
           <Route path="/post/:id">
             <ViewPost />
           </Route>
+          <Route exact path="/calendar">
+            <Calendar />
+          </Route>
           <Route exact path="/training">
             <TrainingList />
           </Route>
-          {/* 
-          <Route path="/training/:level">
-            <Training />
-          </Route> */}
           <Route exact path="/manage-customer/custom-workout-list/:uuid">
             <CustomWorkoutList/>
           </Route>
@@ -97,6 +103,15 @@ export default function Navigation() {
           </Route>
           <Route exact path="/add-video/:id">
             <AddTrainingVideo/>
+          </Route>
+          <Route exact path="/add-event-list">
+            <ListEvents/>
+          </Route>
+          <Route exact path="/add-event">
+            <AddEvents />
+          </Route>
+          <Route exact path="/add-event/:id">
+            <AddEvents />
           </Route>
         </Switch>
       </Container>

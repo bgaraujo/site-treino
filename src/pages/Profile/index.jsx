@@ -20,7 +20,7 @@ import {database} from "../../Firebase/index";
 const Profile = ({state}) => {
     const [name,setName] = useState("");
     const [birthdate, setBirthdate] = useState("");
-    const [gender, setGender] = useState("");  
+    const [gender, setGender] = useState("");
 
     const history = useHistory();
 
@@ -43,7 +43,7 @@ const Profile = ({state}) => {
 
     const getProfile = () => {
         const {userID} = state;
-        
+
         database.ref().child("users").child(userID).get().then((snapshot) => {
         if (snapshot.exists()) {
             var data = snapshot.val();
@@ -74,18 +74,18 @@ const Profile = ({state}) => {
                 </Grid>
                 <Grid item>
                     <form noValidate autoComplete="off">
-                        <TextField 
+                        <TextField
                             label="Nome"
-                            value={name} 
+                            value={name}
                             onChange={(e) => setName(e.target.value)}
                             fullWidth/>
 
-                        <TextField 
-                            type="date" 
+                        <TextField
+                            type="date"
                             value={birthdate}
                             onChange={(e) => setBirthdate(e.target.value)}
                             defaultValue="2000-01-01"
-                            label="Data de nascimento" 
+                            label="Data de nascimento"
                             fullWidth/>
 
                     </form>
@@ -93,8 +93,8 @@ const Profile = ({state}) => {
                 <Grid item>
                     <FormControl component="fieldset">
                         <FormLabel component="legend">Género</FormLabel>
-                        <RadioGroup 
-                            row  
+                        <RadioGroup
+                            row
                             value={gender}
                             onChange={(e) => setGender(e.target.value)}>
                             <FormControlLabel value="F" control={<Radio />} label="Feminino" />
@@ -110,5 +110,4 @@ const Profile = ({state}) => {
     );
 }
 
-//Profileexport default Profile;
 export default  connect( state => ({state:state}) ) (Profile);

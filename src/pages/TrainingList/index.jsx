@@ -32,9 +32,9 @@ const TrainingList = ({state}) => {
     return (
         <Grid container spacing={2}>
             {
-                workouts.map( workout =>  
+                workouts.map( workout =>
                     <Grid key={workout.id} item xs={12}>
-                        <TrainingCard 
+                        <TrainingCard
                             href={`/custom-workout/${workout.id}`}
                             img={workout.imageURL}
                             name={workout.name}
