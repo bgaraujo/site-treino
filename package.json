@@ -1,7 +1,7 @@
 {
   "name": "treino",
   "version": "0.1.0",
-  "homepage": "https://bgaraujo.github.io/site-treino",
+  "homepage": "https://bgaraujo.github.io/site-treino/",
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "^2.13.1",
