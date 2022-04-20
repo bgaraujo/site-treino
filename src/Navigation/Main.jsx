@@ -5,9 +5,10 @@ import NavigationLogOff from "./NavigationLogOff";
 
 
 const Main = ({state}) => {
+    console.log("state.userID",state.userID)
     return(
         <>
-            { 
+            {
                 state.userID?
                 <Navigation/>:
                 <NavigationLogOff/>
