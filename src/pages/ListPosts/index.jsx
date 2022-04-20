@@ -42,7 +42,7 @@ const ListPosts = () => {
         <>
             <Grid
                 container
-                justify="center"
+                justifyContent="center"
                 spacing={3}
             >
                 {

@@ -40,7 +40,7 @@ const ListCustomers = ({state}) => {
     return (
         <Grid
             container
-            justify="center"
+            justifyContent="center"
             spacing={3}
         >
             {

@@ -6,17 +6,24 @@ import {
     Grid,
     TextField,
     Paper,
-    Button
+    Button,
+    FormControl,
+    FormLabel,
+    RadioGroup,
+    FormControlLabel,
+    Radio
 } from "@material-ui/core";
 import { database, auth } from "../../Firebase";
+import moment from 'moment';
 
 const AddCustomer = ({ state }) => {
     let { id } = useParams();
     const history = useHistory()
 
-    const [title, setTitle] = useState("");
-    const [email, setSummary] = useState("");
-    const [password, setText] = useState("");
+    const [email, setEmail] = useState("");
+    const [birthdate, setBirthdate] = useState(moment().format("YYYY-MM-DD"));
+    const [gender, setGender] = useState("F");
+    const [name, setName] = useState("");
 
     useEffect(() => {
         if (id)
@@ -25,12 +32,9 @@ const AddCustomer = ({ state }) => {
 
 
     const getPost = (id) => {
-        database.ref().child("posts").child(id).get().then((snapshot) => {
+        database.ref().child("users").child(id).get().then((snapshot) => {
             if (snapshot.exists()) {
                 var data = snapshot.val();
-                setTitle(data.title);
-                setSummary(data.summary);
-                setText(data.text);
 
             }
         }).catch((error) => {
@@ -38,27 +42,60 @@ const AddCustomer = ({ state }) => {
         });
     }
 
-    const savePost = () => {
-        auth.createUserWithEmailAndPassword()
+    const saveUser = () => {
+        auth.createUserWithEmailAndPassword(email,email).then((userCredential) => {
+            database.ref('users').child(userCredential.user.uid).set({
+                birthdate:birthdate,
+                gender:gender,
+                name:name,
+                admin:false
+            }).then(() => {
+                auth.sendPasswordResetEmail(email).then(() => {
+                    history.goBack();
+                });
+            });
 
-        database.ref('users').push({
-            birthdate:"1994-02-16",
-            gender:"F",
-            name:"Maria"
-        });
-
-        history.goBack();
+        }).catch((error) => console.log(error))
     }
 
+    console.log(birthdate);
     return (
         <Paper>
-            <Grid container direction="column" >
+            <Grid container direction="column" spacing={2}>
                 <Grid item xs={12}>
                     <TextField
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                         id="standard-basic"
-                        label="titulo"
+                        label="Nome"
+                        fullWidth />
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        id="standard-basic"
+                        label="email"
+                        fullWidth />
+                </Grid>
+                <Grid item>
+                    <FormControl component="fieldset">
+                        <FormLabel component="legend">Género</FormLabel>
+                        <RadioGroup
+                            row
+                            value={gender}
+                            onChange={(e) => setGender(e.target.value)}>
+                            <FormControlLabel value="F" control={<Radio />} label="Feminino" />
+                            <FormControlLabel value="M" control={<Radio />} label="Masculino" />
+                        </RadioGroup>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        value={birthdate}
+                        onChange={(e) => setBirthdate(e.target.value)}
+                        label="Data"
+                        type="date"
                         fullWidth />
                 </Grid>
                 <Grid item xs={12}>
@@ -66,7 +103,7 @@ const AddCustomer = ({ state }) => {
                         variant="contained"
                         color="primary"
                         fullWidth
-                        onClick={savePost}
+                        onClick={saveUser}
                     >
                         Salvar
             </Button>

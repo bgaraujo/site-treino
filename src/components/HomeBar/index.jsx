@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { connect } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import {
@@ -25,13 +25,23 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import "./style.css";
-import { auth } from "../../Firebase/index"
+import { auth, database } from "../../Firebase/index"
 
 
 const HomeBar = ({ state }) => {
   let history = useHistory();
   const location = useLocation();
   const [menuState, setMenuState] = useState(false);
+  const [admin,setAdmin] = useState(false);
+
+  useEffect(() => {
+    database.ref().child("/users").child(auth.currentUser.uid).get().then((snapshot)=>{
+      if (snapshot.exists()) {
+        var data = snapshot.val();
+        setAdmin(data.admin)
+      }
+    });
+  },[]);
 
   const toggleDrawer = () => {
     setMenuState(!menuState)
@@ -89,14 +99,15 @@ const HomeBar = ({ state }) => {
           onClick={toggleDrawer}
           onKeyDown={toggleDrawer}
         >
+          {!admin &&
           <List>
             <ListItem button onClick={() => navigate("/profile")}>
               <ListItemIcon><AccountCircleIcon /> </ListItemIcon>
               <ListItemText primary={"Usuario"} />
             </ListItem>
           </List>
-          <Divider />
-          {/* Admin menu */}
+          }
+          {admin &&
           <List>
             <ListItem button onClick={() => navigate("/list-customers")}>
               <ListItemIcon>
@@ -122,8 +133,9 @@ const HomeBar = ({ state }) => {
               </ListItemIcon>
               <ListItemText primary={"Add Eventos"} />
             </ListItem>
-          </List>
-          {/* Fim admin menu */}
+          </List>}
+          {!admin &&
+          <>
           <Divider />
           <List>
             <ListItem button onClick={() => navigate("/my-evolution")}>
@@ -164,6 +176,7 @@ const HomeBar = ({ state }) => {
               <ListItemText primary={"Sair"} />
             </ListItem>
           </List>
+          </>}
         </div>
       </Drawer>
     </div>

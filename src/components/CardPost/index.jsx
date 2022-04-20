@@ -11,7 +11,8 @@ import {
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import "./style.scss";
-import { useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom";
+import {database, auth} from "../../Firebase";
 
 export default function CardPost({ post, admin }) {
   const history = useHistory();
@@ -21,6 +22,14 @@ export default function CardPost({ post, admin }) {
       history.push("/add-post/" + post.id)
     else
       history.push("/post/" + post.id)
+  }
+
+  const like = () => {
+    database.ref().child("/posts").child(post.id).child("likes").equalTo(auth.currentUser.uid).once().then((data) => {
+      console.log(data);
+    })
+
+    database.ref().child("/posts").child(post.id).child("likes").push(auth.currentUser.uid);
   }
 
   return (
@@ -43,7 +52,7 @@ export default function CardPost({ post, admin }) {
       {
         !admin && <CardActions>
           <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
+            <FavoriteIcon onClick={() => like(post.id)} />
           </IconButton>
           <IconButton aria-label="share">
             <ShareIcon />
