@@ -168,6 +168,10 @@ const HomeBar = ({ state }) => {
               </ListItemIcon>
               <ListItemText primary={"Proximo pagametno"} />
             </ListItem> */}
+          </List>
+          </>
+          }
+          <List>
             <Divider />
             <ListItem button onClick={signOut}>
               <ListItemIcon >
@@ -176,7 +180,6 @@ const HomeBar = ({ state }) => {
               <ListItemText primary={"Sair"} />
             </ListItem>
           </List>
-          </>}
         </div>
       </Drawer>
     </div>
