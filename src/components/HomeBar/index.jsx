@@ -70,7 +70,7 @@ const HomeBar = ({ state }) => {
       <AppBar position="fixed">
         <Toolbar variant="dense">
           {
-            location.pathname !== "/" ?
+            location.pathname !== "/site-treino" ?
               <IconButton
                 aria-controls="menu-appbar"
                 aria-haspopup="true"

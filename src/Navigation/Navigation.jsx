@@ -35,7 +35,7 @@ export default function Navigation() {
       <HomeBar />
       <Container className="container-navigation" maxWidth="md" >
         <Switch>
-          <Route exact path="/">
+          <Route exact path="/site-treino">
             <Home />
           </Route>
           <Route exact path="/profile">
