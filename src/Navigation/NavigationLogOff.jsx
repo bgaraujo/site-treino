@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
@@ -11,16 +10,14 @@ import ForgotMyPassword from "../pages/ForgotMyPassword";
 export default function Navigation() {
   return (
     <div className="fullScreen">
-      <Router>
-          <Switch>
-            <Route exact path="/site-treino" >
-              <Login />
-            </Route>
-            <Route exact path="/forgotPassword">
-              <ForgotMyPassword />
-            </Route>
-          </Switch>
-      </Router>
+      <Switch >
+        <Route exact path="/site-treino" >
+          <Login />
+        </Route>
+        <Route exact path="/site-treino/forgotPassword">
+          <ForgotMyPassword />
+        </Route>
+      </Switch>
     </div>
   );
 }

@@ -19,17 +19,17 @@ export default function CardPost({ post, admin }) {
 
   const goTo = () => {
     if (admin)
-      history.push("/add-post/" + post.id)
+      history.push(window.location.pathname+"/add-post/" + post.id)
     else
-      history.push("/post/" + post.id)
+      history.push(window.location.pathname+"/post/" + post.id)
   }
 
-  const like = () => {
-    database.ref().child("/posts").child(post.id).child("likes").equalTo(auth.currentUser.uid).once().then((data) => {
+  const like = (id) => {
+    database.ref().child("/posts").child(id).child("likes").equalTo(auth.currentUser.uid).once().then((data) => {
       console.log(data);
     })
 
-    database.ref().child("/posts").child(post.id).child("likes").push(auth.currentUser.uid);
+    //database.ref().child("/posts").child(id).child("likes").push(auth.currentUser.uid);
   }
 
   return (
@@ -51,8 +51,8 @@ export default function CardPost({ post, admin }) {
       </CardActionArea>
       {
         !admin && <CardActions>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon onClick={() => like(post.id)} />
+          <IconButton aria-label="add to favorites" onClick={() => like(post.id)}>
+            <FavoriteIcon />
           </IconButton>
           <IconButton aria-label="share">
             <ShareIcon />

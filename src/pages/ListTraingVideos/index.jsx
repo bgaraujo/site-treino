@@ -61,7 +61,7 @@ const ListTraingVideos = () => {
                                 <Typography variant="body1">{`${trainig.title}: ${trainig.description}`}</Typography>
                             </Grid>
                             <Grid item xs={2} className="action-buttons">
-                                <IconButton color="primary" aria-label="upload picture" component="span" onClick={() => history.push(`/add-video/${trainig.id}`)}>
+                                <IconButton color="primary" aria-label="upload picture" component="span" onClick={() => history.push(window.location.pathname+`/add-video/${trainig.id}`)}>
                                     <EditIcon />
                                 </IconButton>
                                 <IconButton color="primary" aria-label="upload picture" component="span" onClick={() => removePost(trainig.id)}>
@@ -74,7 +74,7 @@ const ListTraingVideos = () => {
             }
             </Grid>
             <Fab
-                onClick={() => history.push("/add-video")}
+                onClick={() => history.push(window.location.pathname+"/add-video")}
                 color="primary"
                 className="addButton"
                 aria-label="add">

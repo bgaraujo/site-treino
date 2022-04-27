@@ -1,9 +1,9 @@
 const initialState = {
-    userID:'',
+    userID:'loading',
     page:'login',
     tab:0
 };
-  
+
 const reducer = (state = initialState, action) => {
   console.log( state, action );
 

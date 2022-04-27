@@ -58,7 +58,7 @@ const ForgotMyPassword = ({state}) => {
                             </Button>
                         </Grid>
                         <Grid item>
-                            <Button variant="contained" color="secondary" fullWidth>
+                            <Button variant="contained" color="secondary" fullWidth onClick={()=> history.goBack()}>
                                 Voltar
                             </Button>
                         </Grid>

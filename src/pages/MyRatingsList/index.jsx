@@ -21,7 +21,7 @@ const MyRatingsList = ({state}) => {
     },[])
 
     const goTo = (href) => {
-        history.push(href);
+        history.push(window.location.pathname+href);
     }
 
     const getUsersRatings = () => {
@@ -52,7 +52,7 @@ const MyRatingsList = ({state}) => {
                 spacing={3}
             >
                 {
-                    ratings.map(rating => 
+                    ratings.map(rating =>
                         <Grid key={rating.id}  item xs={12} md={6}>
                             <CardRating rating={rating} uuid={uuid}/>
                         </Grid>
@@ -60,10 +60,10 @@ const MyRatingsList = ({state}) => {
                 }
 
             </Grid>
-            <Fab 
-                onClick={() => goTo("add-rating/"+uuid)}
-                color="primary" 
-                className="addButton" 
+            <Fab
+                onClick={() => goTo(window.location.pathname+"/add-rating/"+uuid)}
+                color="primary"
+                className="addButton"
                 aria-label="add">
                 <AddIcon />
             </Fab>

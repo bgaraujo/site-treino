@@ -7,7 +7,7 @@ export default function TrainingCard({href, img, name, description, percent}) {
   const history = useHistory();
 
   return (
-    <Card className="TrainingCard" onClick={() => history.push(href)}>
+    <Card className="TrainingCard" onClick={() => history.push(window.location.pathname+href)}>
       <CardMedia
         image={img}
         title="Live from space album cover"

@@ -50,10 +50,10 @@ const CustomWorkoutList = () => {
                     )
                 }
             </Grid>
-            <Fab 
-                onClick={() => history.push(`add-custom-workout/${uuid}`)}
-                color="primary" 
-                className="addButton" 
+            <Fab
+                onClick={() => history.push(`${window.location.pathname}/add-custom-workout`)}
+                color="primary"
+                className="addButton"
                 aria-label="add">
                 <AddIcon />
             </Fab>

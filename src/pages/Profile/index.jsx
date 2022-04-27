@@ -38,7 +38,7 @@ const Profile = ({state}) => {
             gender:gender
         });
         alert("Dados salvos com sucesso");
-        history.replace("/");
+        history.goBack();
     }
 
     const getProfile = () => {

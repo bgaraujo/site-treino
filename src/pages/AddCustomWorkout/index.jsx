@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect } from 'react';
-import { 
-  TextField, 
-  Paper, 
-  Table, 
-  TableHead, 
+import {
+  TextField,
+  Paper,
+  Table,
+  TableHead,
   TableRow,
   TableCell,
   TableBody,
   Button,
-  Dialog, 
+  Dialog,
   DialogTitle,
   DialogContent,
   List,
@@ -19,6 +19,7 @@ import {
   Avatar,
   ListItemText,
   Grid,
+  CircularProgress
 } from '@material-ui/core';
 import "./style.scss";
 import { useHistory, useParams } from "react-router-dom";
@@ -39,6 +40,8 @@ const AddCustomWorkout = () => {
   const [file, setFile] = useState();
   const [image, setImage] = useState();
   const [imageURL, setImageURL] = useState();
+
+  const [loading, setLoading] = useState(false);
 
   const [showDialog, setShowDialog] = useState(false);
   const [trainingList, setTrainingList] = useState([]);
@@ -79,6 +82,7 @@ const AddCustomWorkout = () => {
   }
 
   const handleSubmit = () => {
+    setLoading(true);
     if(file) uploadImg(
       (downloadURL) => {
         saveData(downloadURL);
@@ -152,6 +156,22 @@ const AddCustomWorkout = () => {
     if(workoutid) getWorkouts();
   },[ ]);
 
+  if(loading)
+    return(
+      <Grid
+          container
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+          spacing={3}>
+          <Grid item>
+              Salvando
+          </Grid>
+          <Grid item>
+              <CircularProgress />
+          </Grid>
+      </Grid>
+    );
   return (
     <>
       <Paper elevation={3} className="AddCustomWorkout">
@@ -175,16 +195,16 @@ const AddCustomWorkout = () => {
             />
         </Button>
 
-        <TextField 
-          fullWidth 
-          label="Nome do treino" 
+        <TextField
+          fullWidth
+          label="Nome do treino"
           value={name}
           onChange={e => setName(e.target.value)}
           className="margin-botton"/>
 
-        <TextField 
-          fullWidth 
-          label="Descrição" 
+        <TextField
+          fullWidth
+          label="Descrição"
           value={description}
           onChange={ e => setDescription(e.target.value)}
           className="margin-botton"/>
@@ -231,7 +251,6 @@ const AddCustomWorkout = () => {
                   </TableRow>
                 })
               }
-              
             </TableBody>
           </Table>
           <Button variant="outlined" onClick={() => setShowDialog(true)}>Add +</Button>
@@ -250,7 +269,7 @@ const AddCustomWorkout = () => {
             </Button>
           </Grid>
           <Grid item>
-            <Button 
+            <Button
               variant="contained"
               startIcon={<DeleteIcon />}
               size="small"
@@ -259,7 +278,6 @@ const AddCustomWorkout = () => {
             >Remove</Button>
           </Grid>
         </Grid>
-                  
       </Paper>
       <Dialog
         open={showDialog}

@@ -58,8 +58,8 @@ const AddTrainingVideo = ({ state }) => {
                     {
                     videoSrc?
                         <Grid item xs={12} className="ytPlayerContent" dangerouslySetInnerHTML={{ __html: `<iframe type="text/html"
-                                origin="http://localhost:3000/"
-                                src="http://www.youtube.com/embed/${videoSrc.split('v=')[1]}?color=white"
+                                origin="${window.location.origin}"
+                                src="https://www.youtube.com/embed/${videoSrc.split('v=')[1]}?color=white"
                                 frameBorder="0"/>`}}>
                         </Grid>
                         :""

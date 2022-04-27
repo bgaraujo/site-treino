@@ -90,7 +90,6 @@ const CustomWorkout = ({state}) => {
 
       {
           selectedWorkoutsDetails.map( workout => {
-            console.log(workout)
             return(
               <Grid item key={workout.id} xs={12}>
                 <Paper elevation={3} className="CustomWorkout">
@@ -113,8 +112,8 @@ const CustomWorkout = ({state}) => {
                       </Grid>
                       <p className="caption">{workout.detail.description}</p>
                       <div className="ytPlayerContent" dangerouslySetInnerHTML={{ __html: `<iframe type="text/html"
-                        origin="http://localhost:3000/"
-                        src="http://www.youtube.com/embed/${workout.detail.video.split('v=')[1]}?color=white"
+                        origin="${window.location.origin}"
+                        src="https://www.youtube.com/embed/${workout.detail.video.split('v=')[1]}?color=white"
                         frameBorder="0"/>`}}/>
                       <p><RepeatIcon/> Repetiçoes: {workout.repetitions}</p>
                       <p><AlarmIcon/> Pausa: {workout.break}</p>
