@@ -30,7 +30,7 @@ export default function CardRating({ rating, uuid }) {
   const data = new Date(rating.date);
 
   const goTo = () => {
-    history.push(window.location.pathname+"add-rating/" + uuid + "/" + rating.id);
+    history.push("add-rating/" + uuid + "/" + rating.id);
   }
 
   return (

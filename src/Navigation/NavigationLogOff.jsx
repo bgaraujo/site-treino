@@ -11,10 +11,10 @@ export default function Navigation() {
   return (
     <div className="fullScreen">
       <Switch >
-        <Route exact path="/site-treino" >
+        <Route exact path="/" >
           <Login />
         </Route>
-        <Route exact path="/site-treino/forgotPassword">
+        <Route exact path="/forgotPassword">
           <ForgotMyPassword />
         </Route>
       </Switch>

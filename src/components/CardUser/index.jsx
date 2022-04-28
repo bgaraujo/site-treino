@@ -42,7 +42,7 @@ export default function CardUser( {user} ) {
   const date = new Date();
 
   return (
-    <Card className={classes.root} onClick={() => history.push(window.location.pathname+"/manage-customer/"+user.uuid)}>
+    <Card className={classes.root} onClick={() => history.push("manage-customer/"+user.uuid)}>
       <CardMedia
         className={classes.cover}
         image={profilePic}

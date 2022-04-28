@@ -37,7 +37,7 @@ const ListEvents = () => {
         <Grid container direction="column" spacing={3} >
             {
                 arrEvent.map(event => <Grid key={event.id} item xs={12}>
-                    <Paper onClick={() => history.push(window.location.pathname+`add-event/${event.id}`)}>
+                    <Paper onClick={() => history.push(`add-event/${event.id}`)}>
                         <Grid container direction="column" spacing={2} >
                             <Grid item xs={12}>
                                 {event.title}
@@ -55,7 +55,7 @@ const ListEvents = () => {
                 </Grid>)
             }
             <Fab
-                onClick={() =>  history.push(window.location.pathname+"/add-event")}
+                onClick={() =>  history.push("add-event")}
                 color="primary"
                 className="addButton"
                 aria-label="add">

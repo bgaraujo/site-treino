@@ -23,7 +23,7 @@ const Login = ({state}) => {
     }
 
     const navigate = (href) => {
-        history.push(window.location.pathname+href);
+        history.push(href);
     }
 
     return(

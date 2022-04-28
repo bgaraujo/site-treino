@@ -52,7 +52,7 @@ const HomeBar = ({ state }) => {
   const navigate = (href) => {
     if (history.location.pathname === href)
       return;
-    history.push(window.location.pathname+href);
+    history.push(href);
   }
 
   const back = () => {
@@ -74,7 +74,7 @@ const HomeBar = ({ state }) => {
       <AppBar position="fixed">
         <Toolbar variant="dense">
           {
-            location.pathname !== "/site-treino" ?
+            (location.pathname !== "/") ?
               <IconButton
                 aria-controls="menu-appbar"
                 aria-haspopup="true"

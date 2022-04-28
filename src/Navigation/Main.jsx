@@ -45,12 +45,12 @@ const Main = ({dispatch,state}) => {
             </Grid>
         );
     return(
-        <Router>
+        <Router basename="/site-treino">
             <Switch>
                 {
                     state.userID?
-                    <Route path="/site-treino" component={Navigation} />:
-                    <Route path="/site-treino" component={NavigationLogOff} />
+                    <Route path="/" component={Navigation} />:
+                    <Route path="/" component={NavigationLogOff} />
                 }
             </Switch>
         </Router>

@@ -19,9 +19,9 @@ export default function CardPost({ post, admin }) {
 
   const goTo = () => {
     if (admin)
-      history.push(window.location.pathname+"/add-post/" + post.id)
+      history.push("add-post/" + post.id)
     else
-      history.push(window.location.pathname+"/post/" + post.id)
+      history.push("post/" + post.id)
   }
 
   const like = (id) => {

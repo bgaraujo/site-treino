@@ -17,7 +17,7 @@ const ListPosts = () => {
     }, []);
 
     const goTo = (href) => {
-        history.push(window.location.pathname+href);
+        history.push(href);
     }
 
 

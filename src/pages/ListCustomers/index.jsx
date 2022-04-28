@@ -51,7 +51,7 @@ const ListCustomers = ({state}) => {
                 )
             }
             <Fab
-                onClick={() =>  history.push(window.location.pathname+"/add-customer")}
+                onClick={() =>  history.push("add-customer")}
                 color="primary"
                 className="addButton"
                 aria-label="add">

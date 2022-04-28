@@ -85,12 +85,12 @@ const ManageCustomer = ({state}) => {
                 </Paper>
             </Grid>
             <Grid item xs={12}>
-                <Button variant="contained" onClick={() => history.push(window.location.pathname+"/custom-workout-list/"+uuid)} fullWidth endIcon={<FitnessCenterIcon />}>
+                <Button variant="contained" onClick={() => history.push("custom-workout-list/"+uuid)} fullWidth endIcon={<FitnessCenterIcon />}>
                     Treinos
                 </Button>
             </Grid>
             <Grid item xs={12}>
-                <Button variant="contained" onClick={() => history.push(window.location.pathname+"/list-client-rating/"+uuid)} fullWidth endIcon={<TrendingUpIcon />}>
+                <Button variant="contained" onClick={() => history.push("list-client-rating/"+uuid)} fullWidth endIcon={<TrendingUpIcon />}>
                     Metricas
                 </Button>
             </Grid>

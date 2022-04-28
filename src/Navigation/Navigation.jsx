@@ -35,83 +35,83 @@ export default function Navigation() {
       <HomeBar />
       <Container className="container-navigation" maxWidth="md" >
         <Switch>
-          <Route exact path="/site-treino">
+          <Route exact path="/">
             <Home />
           </Route>
-          <Route exact path="/site-treino/profile">
+          <Route exact path="/profile">
             <Profile />
           </Route>
-          <Route exact path="/site-treino/list-customers">
+          <Route exact path="/list-customers">
             <ListCustomers />
           </Route>
-          <Route exact path="/site-treino/list-customers/manage-customer/:uuid">
+          <Route exact path="/manage-customer/:uuid">
             <ManageCustomer />
           </Route>
-          <Route exact path="/site-treino/add-customer">
+          <Route exact path="/add-customer">
             <AddCustomer />
           </Route>
-          <Route exact path="/site-treino/manage-customer">
+          <Route exact path="/manage-customer">
             <ManageCustomer />
           </Route>
 
-          <Route exact path="/site-treino/my-evolution">
+          <Route exact path="/my-evolution">
             <MyEvolution />
           </Route>
-          <Route exact path="/site-treino/list-customers/manage-customer/:userid/list-client-rating/:uuid">
+          <Route exact path="/manage-customer/list-client-rating/:uuid">
             <MyRatingsList />
           </Route>
-          <Route path="/site-treino/manage-customer/list-client-rating/add-rating/:uuid/:id">
+          <Route path="/manage-customer/list-client-rating/add-rating/:uuid/:id">
             <AddCustomerRating />
           </Route>
-          <Route path="/site-treino/manage-customer/list-client-rating/add-rating/:uuid">
+          <Route path="/add-rating/:uuid">
             <AddCustomerRating />
           </Route>
-          <Route exact path="/site-treino/add-post">
+          <Route exact path="/add-post">
             <AddPost />
           </Route>
-          <Route exact path="/site-treino/add-post/:id">
+          <Route exact path="/add-post/:id">
             <AddPost />
           </Route>
-          <Route exact path="/site-treino/posts">
+          <Route exact path="/posts">
             <ListPosts />
           </Route>
-          <Route path="/site-treino/post/:id">
+          <Route path="/post/:id">
             <ViewPost />
           </Route>
-          <Route exact path="/site-treino/calendar">
+          <Route exact path="/calendar">
             <Calendar />
           </Route>
-          <Route exact path="/site-treino/training">
+          <Route exact path="/training">
             <TrainingList />
           </Route>
-          <Route exact path="/site-treino/list-customers/manage-customer/:clientid/custom-workout-list/:uuid">
+          <Route exact path="/manage-customer/custom-workout-list/add-custom-workout">
+            <AddCustomWorkout />
+          </Route>
+          <Route exact path="/manage-customer/custom-workout-list/:uuid">
             <CustomWorkoutList/>
           </Route>
-          <Route exact path="/site-treino/list-customers/manage-customer/:clientid/custom-workout-list/:uuid/add-custom-workout/:workoutid">
+          <Route exact path="/manage-customer/custom-workout-list/add-custom-workout/:uuid/:workoutid">
             <AddCustomWorkout />
           </Route>
-          <Route exact path="/site-treino/list-customers/manage-customer/:clientid/custom-workout-list/:uuid/add-custom-workout">
-            <AddCustomWorkout />
-          </Route>
-          <Route exact path="/site-treino/training/custom-workout/:workoutid">
+          <Route exact path="/custom-workout/:workoutid">
             <CustomWorkout />
           </Route>
-          <Route exact path="/site-treino/videos">
+          <Route exact path="/videos">
             <ListTraingVideos/>
           </Route>
-          <Route exact path="/site-treino/add-video">
+          <Route exact path="/add-video">
             <AddTrainingVideo/>
           </Route>
-          <Route exact path="/site-treino/add-video/:id">
+          <Route exact path="/add-video/:id">
             <AddTrainingVideo/>
           </Route>
-          <Route exact path="/site-treino/add-event-list">
+          <Route exact path="/add-event-list">
             <ListEvents/>
           </Route>
-          <Route exact path="/site-treino/add-event">
+          <Route exact path="/add-event">
             <AddEvents />
           </Route>
-          <Route exact path="/site-treino/add-event/:id">
+          <Route exact path="/add-event/:id">
             <AddEvents />
           </Route>
         </Switch>

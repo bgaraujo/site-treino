@@ -13,7 +13,7 @@ const Home = () => {
   }, []);
 
   const get = () => {
-    database.ref().child('posts').get().then((snapshot) => {
+    database.ref('posts').get().then((snapshot) => {
       if (snapshot.exists()) {
         var data = snapshot.val();
         var arrPosts = [];

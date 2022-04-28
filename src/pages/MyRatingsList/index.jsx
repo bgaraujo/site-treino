@@ -21,7 +21,7 @@ const MyRatingsList = ({state}) => {
     },[])
 
     const goTo = (href) => {
-        history.push(window.location.pathname+href);
+        history.push(href);
     }
 
     const getUsersRatings = () => {
@@ -61,7 +61,7 @@ const MyRatingsList = ({state}) => {
 
             </Grid>
             <Fab
-                onClick={() => goTo(window.location.pathname+"/add-rating/"+uuid)}
+                onClick={() => goTo("/add-rating/"+uuid)}
                 color="primary"
                 className="addButton"
                 aria-label="add">
