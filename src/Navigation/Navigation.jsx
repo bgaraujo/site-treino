@@ -29,9 +29,9 @@ import AddEvents from "../pages/AddEvents";
 
 import "./style.scss";
 
-export default function Navigation() {
+export default function Navigation() { 
   return (
-    <>
+    <Router basename="/site-treino">
       <HomeBar />
       <Container className="container-navigation" maxWidth="md" >
         <Switch>
@@ -84,13 +84,14 @@ export default function Navigation() {
           <Route exact path="/training">
             <TrainingList />
           </Route>
-          <Route exact path="/manage-customer/custom-workout-list/add-custom-workout">
-            <AddCustomWorkout />
-          </Route>
+          
           <Route exact path="/manage-customer/custom-workout-list/:uuid">
             <CustomWorkoutList/>
           </Route>
           <Route exact path="/manage-customer/custom-workout-list/add-custom-workout/:uuid/:workoutid">
+            <AddCustomWorkout />
+          </Route>
+          <Route exact path="/manage-customer/custom-workout-list/add-custom-workout/:uuid">
             <AddCustomWorkout />
           </Route>
           <Route exact path="/custom-workout/:workoutid">
@@ -116,6 +117,6 @@ export default function Navigation() {
           </Route>
         </Switch>
       </Container>
-    </>
+    </Router>
   );
 }

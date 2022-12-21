@@ -3,20 +3,11 @@ import { connect } from "react-redux";
 import Navigation from "./Navigation";
 import NavigationLogOff from "./NavigationLogOff";
 import { Grid, CircularProgress } from '@material-ui/core';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    useHistory
-  } from "react-router-dom";
-  import { setUser } from '../Store/actions';
+import { setUser } from '../Store/actions';
 import { auth } from "../Firebase";
 
 
 const Main = ({dispatch,state}) => {
-    const history = useHistory();
-    console.log("history",history,state.userID);
-
     useEffect(() => {
         // Verifica se ja esta logado e entra direto
         auth.onAuthStateChanged((user) => {
@@ -45,15 +36,9 @@ const Main = ({dispatch,state}) => {
             </Grid>
         );
     return(
-        <Router basename="/site-treino">
-            <Switch>
-                {
-                    state.userID?
-                    <Route path="/" component={Navigation} />:
-                    <Route path="/" component={NavigationLogOff} />
-                }
-            </Switch>
-        </Router>
+        state.userID?
+        <Navigation/>:
+        <NavigationLogOff/>
     );
 };
 

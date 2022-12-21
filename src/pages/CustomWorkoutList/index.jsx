@@ -12,6 +12,8 @@ const CustomWorkoutList = () => {
 
     const[workouts, setWorkout] = useState([])
 
+    console.log("uuid", uuid)
+
     const getData = () => {
         database.ref().child(`users/${uuid}/workout`).get().then((data) => {
             if(data.exists()){
@@ -21,7 +23,7 @@ const CustomWorkoutList = () => {
                     arrData[id].id = id;
                     arrWorkout.push(arrData[id])
                 }
-                console.log(arrWorkout)
+                console.log("arrWorkout", arrWorkout)
                 setWorkout(arrWorkout)
             }
         })
@@ -51,7 +53,7 @@ const CustomWorkoutList = () => {
                 }
             </Grid>
             <Fab
-                onClick={() => history.push(`add-custom-workout`)}
+                onClick={() => history.push(`add-custom-workout/${uuid}`)}
                 color="primary"
                 className="addButton"
                 aria-label="add">

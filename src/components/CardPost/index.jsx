@@ -32,9 +32,27 @@ export default function CardPost({ post, admin }) {
     //database.ref().child("/posts").child(id).child("likes").push(auth.currentUser.uid);
   }
 
+  const longPress = (e) => {
+    console.log(e);
+    switch (e.type) {
+      case "onTouchStart":
+        const event = setTimeout(() => {
+          console.log("foi")
+        }, 2000);        
+        break;
+      case "onTouchEnd":
+      break;
+      default:
+        break;
+    }
+
+
+
+  }
+
   return (
     <Card className="CardPost">
-      <CardActionArea onClick={() => goTo(post.id)}>
+      <CardActionArea onTouchStart={longPress} onTouchEnd={longPress} onClick={() => goTo(post.id)}>
         <CardMedia
           className="media"
           image={post.img}
