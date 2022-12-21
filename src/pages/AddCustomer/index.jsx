@@ -58,7 +58,6 @@ const AddCustomer = ({ state }) => {
         }).catch((error) => console.log(error))
     }
 
-    console.log(birthdate);
     return (
         <Paper>
             <Grid container direction="column" spacing={2}>

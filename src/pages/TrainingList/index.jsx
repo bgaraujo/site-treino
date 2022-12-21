@@ -6,7 +6,6 @@ import TrainingCard from '../../components/TrainingCard';
 import { database } from "../../Firebase";
 
 const TrainingList = ({state}) => {
-    console.log(state);
     let uuid = state.userID;
 
     const[workouts, setWorkout] = useState([])

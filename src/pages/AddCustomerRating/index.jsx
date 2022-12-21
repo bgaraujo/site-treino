@@ -48,8 +48,6 @@ const AddCustomerRating = ({state}) => {
     const [visceralFat, setVisceralFat] = useState("");
 
 
-    console.log(uuid, id);
-
     const saveData = () => {
         const date = new Date();
         

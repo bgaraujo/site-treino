@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+import { getPosts } from '../../Store/actions';
 import {
     Grid,
     Fab
@@ -8,34 +10,27 @@ import AddIcon from "@material-ui/icons/Add";
 import { database } from "../../Firebase/index";
 import CardPost from "../../components/CardPost";
 
-const ListPosts = () => {
+const ListPosts = ({ dispatch, state }) => {
     const history = useHistory();
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        getPosts();
+        dispatch(getPosts());
     }, []);
 
-    const goTo = (href) => {
-        history.push(href);
-    }
+    useEffect(() => {
+        console.log("state",state)
+    }, [state]);
 
 
     const getPosts = () => {
-        database.ref().child("posts").get().then((snapshot) => {
-            if (snapshot.exists()) {
-                var arrPosts = snapshot.val();
-                var data = [];
-                for (var id in arrPosts) {
-                    arrPosts[id].id = id;
-                    data.push(arrPosts[id])
-                }
-
-                setPosts(data);
-            }
-        }).catch((error) => {
-            console.error(error);
+        var arrPosts = [];
+        database.ref('posts').orderByChild("active").equalTo(true).on("child_added", (snapshot) => {
+          var post = snapshot.val();
+          post.id = snapshot.key;
+          arrPosts.push(post)
         });
+        setPosts(arrPosts)
     }
 
     return (
@@ -53,7 +48,7 @@ const ListPosts = () => {
                 }
             </Grid>
             <Fab
-                onClick={() => goTo("/add-post")}
+                onClick={() => history.push("/posts/add-post")}
                 color="primary"
                 className="addButton"
                 aria-label="add">
@@ -62,4 +57,5 @@ const ListPosts = () => {
         </>
     );
 }
-export default ListPosts;
+
+export default  connect( state => ({state:state}) ) (ListPosts);

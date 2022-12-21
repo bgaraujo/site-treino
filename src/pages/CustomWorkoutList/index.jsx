@@ -12,8 +12,6 @@ const CustomWorkoutList = () => {
 
     const[workouts, setWorkout] = useState([])
 
-    console.log("uuid", uuid)
-
     const getData = () => {
         database.ref().child(`users/${uuid}/workout`).get().then((data) => {
             if(data.exists()){
@@ -23,7 +21,6 @@ const CustomWorkoutList = () => {
                     arrData[id].id = id;
                     arrWorkout.push(arrData[id])
                 }
-                console.log("arrWorkout", arrWorkout)
                 setWorkout(arrWorkout)
             }
         })

@@ -112,7 +112,8 @@ const AddPost = ({ state }) => {
                             title: title,
                             summary: summary,
                             text: text,
-                            timestamp: timestamp
+                            timestamp: timestamp,
+                            active:true
                         });
                     });
                 })
@@ -122,12 +123,25 @@ const AddPost = ({ state }) => {
                     title: title,
                     summary: summary,
                     text: text,
-                    timestamp: timestamp
+                    timestamp: timestamp,
+                    active:true
                 });
 
                 history.goBack();
             }
         }
+    }
+
+    const removePost = () => {
+        database.ref('posts/' + id).set({
+            img: newImage,
+            title: title,
+            summary: summary,
+            text: text,
+            active: false
+        });
+
+        history.goBack();
     }
 
     return (
@@ -137,7 +151,7 @@ const AddPost = ({ state }) => {
                     <ProgressScreen /> :
                     <form noValidate autoComplete="off">
                         <Paper>
-                            <Grid container direction="column" >
+                            <Grid container spacing={2} direction="column" >
                                 <Grid item xs={12} className="img-container">
                                     {
                                         newImage ?
@@ -197,6 +211,16 @@ const AddPost = ({ state }) => {
                                         onClick={savePost}
                                     >
                                         Salvar
+                            </Button>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        fullWidth
+                                        onClick={removePost}
+                                    >
+                                        Remover
                             </Button>
                                 </Grid>
                             </Grid>

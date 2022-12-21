@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from "react-redux";
 import {
   IconButton,
   Card,
@@ -13,45 +14,46 @@ import ShareIcon from '@material-ui/icons/Share';
 import "./style.scss";
 import { useHistory } from "react-router-dom";
 import {database, auth} from "../../Firebase";
+import { getPosts } from "../../Store/actions";
 
-export default function CardPost({ post, admin }) {
+const CardPost = ({ dispatch, post, admin }) => {
   const history = useHistory();
 
   const goTo = () => {
     if (admin)
-      history.push("add-post/" + post.id)
+      history.push("/posts/add-post/" + post.id)
     else
-      history.push("post/" + post.id)
+      history.push("/posts/post/" + post.id)
   }
 
   const like = (id) => {
-    database.ref().child("/posts").child(id).child("likes").equalTo(auth.currentUser.uid).once().then((data) => {
-      console.log(data);
-    })
-
-    //database.ref().child("/posts").child(id).child("likes").push(auth.currentUser.uid);
+    if(!post.likes){
+      database.ref(`posts`).child(`${id}/likes`).push(auth.currentUser.uid).then(()=>{ dispatch(getPosts()) });
+    }else{
+      if(Object.values(post.likes).indexOf(auth.currentUser.uid) < 0)
+        database.ref(`posts`).child(`${id}/likes`).push(auth.currentUser.uid).then(()=>{ dispatch(getPosts()) });
+      else
+        database.ref(`posts`).child(`${id}/likes/${Object.keys(post.likes).find(key => post.likes[key] === auth.currentUser.uid)}`).remove().then(()=>{ dispatch(getPosts()) });
+    }
   }
 
   const longPress = (e) => {
     console.log(e);
-    switch (e.type) {
-      case "onTouchStart":
-        const event = setTimeout(() => {
-          console.log("foi")
-        }, 2000);        
-        break;
-      case "onTouchEnd":
-      break;
-      default:
-        break;
-    }
-
-
-
+    // switch (e.type) {
+    //   case "onTouchStart":
+    //     const event = setTimeout(() => {
+    //       console.log("foi")
+    //     }, 2000);        
+    //     break;
+    //   case "onTouchEnd":
+    //   break;
+    //   default:
+    //     break;
+    // }
   }
 
   return (
-    <Card className="CardPost">
+    <Card className={`CardPost ${post.active}`}>
       <CardActionArea onTouchStart={longPress} onTouchEnd={longPress} onClick={() => goTo(post.id)}>
         <CardMedia
           className="media"
@@ -69,7 +71,7 @@ export default function CardPost({ post, admin }) {
       </CardActionArea>
       {
         !admin && <CardActions>
-          <IconButton aria-label="add to favorites" onClick={() => like(post.id)}>
+          <IconButton aria-label="add to favorites active" className={Object.values(post.likes).indexOf(auth.currentUser.uid)>0?"enabled":"disabled"} onClick={() => like(post.id)}>
             <FavoriteIcon />
           </IconButton>
           <IconButton aria-label="share">
@@ -81,3 +83,5 @@ export default function CardPost({ post, admin }) {
     </Card>
   );
 }
+
+export default connect( state => ({state:state}) ) (CardPost)

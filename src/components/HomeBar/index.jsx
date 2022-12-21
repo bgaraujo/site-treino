@@ -34,8 +34,6 @@ const HomeBar = ({ state }) => {
   const [menuState, setMenuState] = useState(false);
   const [admin,setAdmin] = useState(false);
 
-  console.log("history",history)
-
   useEffect(() => {
     database.ref().child("/users").child(auth.currentUser.uid).get().then((snapshot)=>{
       if (snapshot.exists()) {
@@ -66,8 +64,6 @@ const HomeBar = ({ state }) => {
       // An error happened.
     });
   }
-
-  console.log(window.location)
 
   return (
     <div>

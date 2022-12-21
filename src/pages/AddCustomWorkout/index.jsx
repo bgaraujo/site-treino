@@ -33,7 +33,6 @@ const AddCustomWorkout = () => {
   const history = useHistory();
 
   let { uuid, workoutid } = useParams();
-  console.log(uuid, workoutid);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [selectedWorkouts, setSelectedWorkouts] = useState([]);

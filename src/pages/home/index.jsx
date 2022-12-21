@@ -1,34 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from "react-redux";
+import { getPosts } from '../../Store/actions';
 import {
   Grid,
 } from '@material-ui/core';
 import CardPost from '../../components/CardPost';
-import { database } from '../../Firebase/index';
 
-const Home = () => {
-  const [posts, setPosts] = useState([]);
-
+const Home = ({dispatch, state}) => {
+  
   useEffect(() => {
-    get();
+    dispatch(getPosts());
   }, []);
-
-  const get = () => {
-    database.ref('posts').get().then((snapshot) => {
-      if (snapshot.exists()) {
-        var data = snapshot.val();
-        var arrPosts = [];
-        for (const id in data) {
-          var post = data[id];
-          post.id = id;
-          arrPosts.push(post)
-        }
-        setPosts(arrPosts)
-      }
-    })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
 
   return (
     <Grid
@@ -36,7 +18,8 @@ const Home = () => {
       spacing={2}
     >
       {
-        posts.map((post, key) =>
+        state.posts&&
+        state.posts.map((post, key) =>
           <Grid item key={key} xs={12} md={4}>
             <CardPost post={post} />
           </Grid>
@@ -47,4 +30,4 @@ const Home = () => {
   );
 };
 
-export default (Home);
+export default  connect( state => ({state:state}) ) (Home);

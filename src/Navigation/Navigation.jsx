@@ -66,17 +66,17 @@ export default function Navigation() {
           <Route path="/add-rating/:uuid">
             <AddCustomerRating />
           </Route>
-          <Route exact path="/add-post">
-            <AddPost />
-          </Route>
-          <Route exact path="/add-post/:id">
-            <AddPost />
-          </Route>
           <Route exact path="/posts">
             <ListPosts />
           </Route>
-          <Route path="/post/:id">
+          <Route path="/posts/post/:id">
             <ViewPost />
+          </Route>
+          <Route exact path="/posts/add-post">
+            <AddPost />
+          </Route>
+          <Route exact path="/posts/add-post/:id">
+            <AddPost />
           </Route>
           <Route exact path="/calendar">
             <Calendar />
