@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/site-treino/static/css/main.cf04381f.chunk.css",
-    "main.js": "/site-treino/static/js/main.13f2af1c.chunk.js",
-    "main.js.map": "/site-treino/static/js/main.13f2af1c.chunk.js.map",
-    "runtime-main.js": "/site-treino/static/js/runtime-main.5b354229.js",
-    "runtime-main.js.map": "/site-treino/static/js/runtime-main.5b354229.js.map",
-    "static/js/2.4ce60222.chunk.js": "/site-treino/static/js/2.4ce60222.chunk.js",
-    "static/js/2.4ce60222.chunk.js.map": "/site-treino/static/js/2.4ce60222.chunk.js.map",
-    "static/js/3.16c5610e.chunk.js": "/site-treino/static/js/3.16c5610e.chunk.js",
-    "static/js/3.16c5610e.chunk.js.map": "/site-treino/static/js/3.16c5610e.chunk.js.map",
+    "main.css": "/site-treino/static/css/main.f392c4cd.chunk.css",
+    "main.js": "/site-treino/static/js/main.709edb49.chunk.js",
+    "main.js.map": "/site-treino/static/js/main.709edb49.chunk.js.map",
+    "runtime-main.js": "/site-treino/static/js/runtime-main.ab905b95.js",
+    "runtime-main.js.map": "/site-treino/static/js/runtime-main.ab905b95.js.map",
+    "static/js/2.65580433.chunk.js": "/site-treino/static/js/2.65580433.chunk.js",
+    "static/js/2.65580433.chunk.js.map": "/site-treino/static/js/2.65580433.chunk.js.map",
+    "static/js/3.a01be508.chunk.js": "/site-treino/static/js/3.a01be508.chunk.js",
+    "static/js/3.a01be508.chunk.js.map": "/site-treino/static/js/3.a01be508.chunk.js.map",
     "index.html": "/site-treino/index.html",
     "service-worker.js": "/site-treino/service-worker.js",
     "service-worker.js.map": "/site-treino/service-worker.js.map",
-    "static/css/main.cf04381f.chunk.css.map": "/site-treino/static/css/main.cf04381f.chunk.css.map",
-    "static/js/2.4ce60222.chunk.js.LICENSE.txt": "/site-treino/static/js/2.4ce60222.chunk.js.LICENSE.txt",
+    "static/css/main.f392c4cd.chunk.css.map": "/site-treino/static/css/main.f392c4cd.chunk.css.map",
+    "static/js/2.65580433.chunk.js.LICENSE.txt": "/site-treino/static/js/2.65580433.chunk.js.LICENSE.txt",
     "static/media/style.css": "/site-treino/static/media/bg.7ad7bac2.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.5b354229.js",
-    "static/js/2.4ce60222.chunk.js",
-    "static/css/main.cf04381f.chunk.css",
-    "static/js/main.13f2af1c.chunk.js"
+    "static/js/runtime-main.ab905b95.js",
+    "static/js/2.65580433.chunk.js",
+    "static/css/main.f392c4cd.chunk.css",
+    "static/js/main.709edb49.chunk.js"
   ]
 }
