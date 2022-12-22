@@ -5,4 +5,13 @@
     .media{
         height: 140px;
     }
+
+    .MuiIconButton-root{
+        &.enabled{
+            svg{
+                color: red;
+            }
+        }
+    }
+    
 }

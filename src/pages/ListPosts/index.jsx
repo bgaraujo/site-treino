@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { getPosts } from '../../Store/actions';
@@ -7,31 +8,14 @@ import {
     Fab
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
-import { database } from "../../Firebase/index";
 import CardPost from "../../components/CardPost";
 
 const ListPosts = ({ dispatch, state }) => {
     const history = useHistory();
-    const [posts, setPosts] = useState([]);
 
     useEffect(() => {
         dispatch(getPosts());
     }, []);
-
-    useEffect(() => {
-        console.log("state",state)
-    }, [state]);
-
-
-    const getPosts = () => {
-        var arrPosts = [];
-        database.ref('posts').orderByChild("active").equalTo(true).on("child_added", (snapshot) => {
-          var post = snapshot.val();
-          post.id = snapshot.key;
-          arrPosts.push(post)
-        });
-        setPosts(arrPosts)
-    }
 
     return (
         <>
@@ -41,7 +25,8 @@ const ListPosts = ({ dispatch, state }) => {
                 spacing={3}
             >
                 {
-                    posts.map((post, key) =>
+                    state.posts&&
+                    state.posts.map((post, key) =>
                         <Grid item key={key} xs={12} md={4}>
                             <CardPost post={post} admin={true} />
                         </Grid>)

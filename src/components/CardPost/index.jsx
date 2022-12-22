@@ -37,24 +37,9 @@ const CardPost = ({ dispatch, post, admin }) => {
     }
   }
 
-  const longPress = (e) => {
-    console.log(e);
-    // switch (e.type) {
-    //   case "onTouchStart":
-    //     const event = setTimeout(() => {
-    //       console.log("foi")
-    //     }, 2000);        
-    //     break;
-    //   case "onTouchEnd":
-    //   break;
-    //   default:
-    //     break;
-    // }
-  }
-
   return (
     <Card className={`CardPost ${post.active}`}>
-      <CardActionArea onTouchStart={longPress} onTouchEnd={longPress} onClick={() => goTo(post.id)}>
+      <CardActionArea onClick={() => goTo(post.id)}>
         <CardMedia
           className="media"
           image={post.img}
@@ -71,7 +56,7 @@ const CardPost = ({ dispatch, post, admin }) => {
       </CardActionArea>
       {
         !admin && <CardActions>
-          <IconButton aria-label="add to favorites active" className={Object.values(post.likes).indexOf(auth.currentUser.uid)>0?"enabled":"disabled"} onClick={() => like(post.id)}>
+          <IconButton aria-label="add to favorites active" className={post.likes && Object.values(post.likes).indexOf(auth.currentUser.uid)>=0?"enabled":"disabled"} onClick={() => like(post.id)}>
             <FavoriteIcon />
           </IconButton>
           <IconButton aria-label="share">

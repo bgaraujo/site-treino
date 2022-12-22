@@ -27,20 +27,9 @@ const AddCustomer = ({ state }) => {
 
     useEffect(() => {
         if (id)
-            getPost(id);
+            ;
     }, []);
 
-
-    const getPost = (id) => {
-        database.ref().child("users").child(id).get().then((snapshot) => {
-            if (snapshot.exists()) {
-                var data = snapshot.val();
-
-            }
-        }).catch((error) => {
-            console.error(error);
-        });
-    }
 
     const saveUser = () => {
         auth.createUserWithEmailAndPassword(email,email).then((userCredential) => {

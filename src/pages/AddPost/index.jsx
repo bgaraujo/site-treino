@@ -11,8 +11,9 @@ import {
 import CropDialog from "../../components/CropDialog";
 import { storage, database } from "../../Firebase";
 import ProgressScreen from "../../components/ProgressScreen";
+import {getPosts} from "../../Store/actions";
 
-const AddPost = ({ state }) => {
+const AddPost = ({ dispatch ,state }) => {
     let { id } = useParams();
     const history = useHistory()
     const [image, setImage] = useState();
@@ -133,15 +134,16 @@ const AddPost = ({ state }) => {
     }
 
     const removePost = () => {
-        database.ref('posts/' + id).set({
-            img: newImage,
-            title: title,
-            summary: summary,
-            text: text,
-            active: false
-        });
-
-        history.goBack();
+        if(window.confirm("Deseja realmente apagar a publicação?")){
+            database.ref('posts/' + id).set({
+                img: newImage,
+                title: title,
+                summary: summary,
+                text: text,
+                active: false
+            }).then(() => dispatch(getPosts()));
+            history.goBack();
+        }
     }
 
     return (
