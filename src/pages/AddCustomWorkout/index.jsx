@@ -53,10 +53,7 @@ const AddCustomWorkout = () => {
 
   const uploadImg = (callback) => {
     var uploadTask =  storage.ref().child(image).put(file);
-    uploadTask.on('state_changed', function(snapshot){
-        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log(progress);
-    }, function(error) {
+    uploadTask.on('state_changed', function(error) {
         console.log(error);
     }, function() {
         uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {

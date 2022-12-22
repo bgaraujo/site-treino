@@ -53,7 +53,6 @@ const AddPost = ({ dispatch ,state }) => {
                 setTitle(data.title);
                 setSummary(data.summary);
                 setText(data.text);
-
             }
         }).catch((error) => {
             console.error(error);
@@ -63,11 +62,8 @@ const AddPost = ({ dispatch ,state }) => {
     const upload = (callBack) => {
         const name = new Date().getTime();
         const uploadTask = storage.ref(`posts/${name}.jpg`).put(blob);
-        uploadTask.on('state_changed', function (snapshot) {
-            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log('Upload is ' + progress + '% done');
-        }, function (error) {
-            // Handle unsuccessful uploads
+        uploadTask.on('state_changed', function (error) {
+            console.error(error)
         }, function () {
             uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
                 console.log('File available at', downloadURL);
@@ -100,7 +96,8 @@ const AddPost = ({ dispatch ,state }) => {
                     title: title,
                     summary: summary,
                     text: text,
-                    timestamp: timestamp
+                    timestamp: timestamp,
+                    active:true
                 });
                 history.goBack();
             });

@@ -58,13 +58,13 @@ const MyEvolution = ({state}) => {
             label: name,
             data: [],
             fill: false,
-            borderColor: '#00ff00',
+            borderColor: '#EE887A',
             tension: 0.1
         };
 
         for(var id in lRatings){
             const rating = lRatings[id];
-            data.labels.push(moment(rating.date).format("MM"));
+            data.labels.push(moment.unix(rating.date).format("MM/YYYY"));
             dataSet.data.push(rating[field]);
         }
         data.datasets.push(dataSet)
@@ -100,14 +100,6 @@ const MyEvolution = ({state}) => {
                 <Paper elevation={3}>
                     {
                         ratings?< ChartLine data={() => mapData(ratings, "leanMass", "Masa Magra")} />:""
-                    }
-                </Paper>
-            </Grid>
-
-            <Grid item xs={12} md={6}>
-                <Paper elevation={3}>
-                    {
-                        ratings?< ChartLine data={() => mapData(ratings, "visceralFat", "Gordura Viceral")} />:""
                     }
                 </Paper>
             </Grid>

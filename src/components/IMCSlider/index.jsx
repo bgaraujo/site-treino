@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from "react"
-import { 
-    Slider
-} from "@material-ui/core";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from "react";
 import moment from "moment";
-import { calcIMC, table } from "../../helpers/imcCalc";
+import { Typography } from "@material-ui/core";
+import { calcIMC } from "../../helpers/imcCalc";
 
 const IMCSlider = ({ratings,user}) => {
     const [imc, setImc] = useState(0);
-    const [marks, setMarks] = useState();
+    const [range, setRange] = useState();
 
     useEffect(() =>{
         getIMC();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     useEffect(() =>{
         init();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[imc])
 
     const getIMC = () => {
@@ -31,52 +28,21 @@ const IMCSlider = ({ratings,user}) => {
         setImc(parseFloat(result));
     }
 
-
-
     const init = () => {
         if(!imc) return;
         const myRange = calcIMC(imc,user.gender);
-        console.log(myRange)
-        setMarks([
-            {
-                value: 1,
-                label: myRange.min
-            },
-            {
-                value: 50,
-                label: "50"
-            },
-            {
-                value: 99,
-                label: myRange.max
-            },
-        ])
+        setRange(myRange)
     }
-
-    // const marks = [
-    //     {
-    //       value: 1,
-    //       label: '10',
-    //     },
-    //     {
-    //       value: 99,
-    //       label: '40',
-    //     },
-    // ];
 
     return(
         <>
             {
-                marks?
-                <Slider
-                    disabled
-                    defaultValue={(imc*2)}
-                    step={1}
-                    aria-labelledby="discrete-slider-small-steps"
-                    marks={table[user.gender]}
-                    valueLabelDisplay="on"
-                />:
-                ""
+                range &&
+                <>
+                    <Typography variant="body">
+                        {`Seu imc é ${imc} e voce esta ${range.title}`} 
+                    </Typography>
+                </>
             }
         </>
     );

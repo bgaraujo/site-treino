@@ -1,76 +1,52 @@
-const table = {
-    M:[
+const table = [
         {
-            label:"43",
-            title:"Obesidade mórbida",
+            title:"com obesidade Grau 3",
             max:99999,
-            min:43,
-            value:(16.6*5)
+            min:40.1
+        },    
+        {
+            title:"com obesidade Grau 2",
+            max:40,
+            min:35.1
         },
         {
-            label:"39.9",
-            title:"Obesidade moderada",
-            max:39.9,
-            min:30,
-            value:(16.6*4)
+            title:"com obesidade Grau 1",
+            max:35,
+            min:30.1
         },
         {
-            label:"29.9",
-            title:"Obesidade leve",
-            max:29.9,
-            min:25,
-            value:(16.6*3)
+            title:"com sobrepeso",
+            max:30,
+            min:25.1
         },
         {
-            label:"24.9",
-            title:"Normal",
-            max:24.9,
-            min:20,
-            value:(16.6*2)
+            title:"Saudável",
+            max:25,
+            min:18.6
         },
         {
-            label:"20",
-            title:"Abaixo do peso",
-            max:20,
-            min:0,
-            value:(16.6*1)
-        }
-    ],
-    F:[
-        {
-            label:"Obesidade mórbida",
-            max:9999,
-            min:39
+            title:"com magreza leve",
+            max:18.5,
+            min:17.1
         },
         {
-            label:"Obesidade moderada",
-            max:38.9,
-            min:29
+            title:"com magreza moderada",
+            max:17,
+            min:16.1
         },
         {
-            label:"Obesidade leve",
-            max:28.9,
-            min:24
-        },
-        {
-            label:"Normal",
-            max:23.9,
-            min:19
-        },
-        {
-            label:"Abaixo do peso",
-            max:19,
+            title:"com magreza grave",
+            max:16,
             min:0
         }
-    ]
-};
-function calcIMC(points,gender){
-    for(var i = 1; i<table[gender].length ; i++){
+    ];
+function calcIMC(points){
+    for(var i = 1; i<table.length ; i++){
         if(
-            points < table[gender][i].max &&
-            points > table[gender][i].min
+            points < table[i].max &&
+            points > table[i].min
         )
-            return table[gender][i];
+            return table[i];
     }
 }
 export {
