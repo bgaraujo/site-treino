@@ -13,13 +13,19 @@ const Home = ({dispatch, state}) => {
     dispatch(getPosts());
   }, []);
 
+  window.onbeforeunload = function(event) {
+    event.preventDefault();
+    dispatch(getPosts());
+    return "";
+  }
+
   return (
     <Grid
       container
       spacing={2}
     >
       {
-        state.posts&&
+        state.posts &&
         state.posts.map((post, key) =>
           <Grid item key={key} xs={12} md={4}>
             <CardPost post={post} />
