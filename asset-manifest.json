@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/site-treino/static/css/main.99adc880.chunk.css",
-    "main.js": "/site-treino/static/js/main.858fffaa.chunk.js",
-    "main.js.map": "/site-treino/static/js/main.858fffaa.chunk.js.map",
+    "main.css": "/site-treino/static/css/main.a6e64a0e.chunk.css",
+    "main.js": "/site-treino/static/js/main.97193bfd.chunk.js",
+    "main.js.map": "/site-treino/static/js/main.97193bfd.chunk.js.map",
     "runtime-main.js": "/site-treino/static/js/runtime-main.ab905b95.js",
     "runtime-main.js.map": "/site-treino/static/js/runtime-main.ab905b95.js.map",
     "static/js/2.65580433.chunk.js": "/site-treino/static/js/2.65580433.chunk.js",
@@ -12,14 +12,14 @@
     "index.html": "/site-treino/index.html",
     "service-worker.js": "/site-treino/service-worker.js",
     "service-worker.js.map": "/site-treino/service-worker.js.map",
-    "static/css/main.99adc880.chunk.css.map": "/site-treino/static/css/main.99adc880.chunk.css.map",
+    "static/css/main.a6e64a0e.chunk.css.map": "/site-treino/static/css/main.a6e64a0e.chunk.css.map",
     "static/js/2.65580433.chunk.js.LICENSE.txt": "/site-treino/static/js/2.65580433.chunk.js.LICENSE.txt",
     "static/media/style.css": "/site-treino/static/media/bg.7ad7bac2.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.ab905b95.js",
     "static/js/2.65580433.chunk.js",
-    "static/css/main.99adc880.chunk.css",
-    "static/js/main.858fffaa.chunk.js"
+    "static/css/main.a6e64a0e.chunk.css",
+    "static/js/main.97193bfd.chunk.js"
   ]
 }
