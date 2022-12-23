@@ -88,7 +88,7 @@ const HomeBar = ({ state }) => {
               </IconButton>
           }
 
-          <Typography variant="h6" onClick={() => history.replace("/")}>Cantinho da saúde</Typography>
+          <Typography variant="h6" onClick={() => history.replace("/")}>Personal Aline Fajardo</Typography>
 
         </Toolbar>
       </AppBar>
