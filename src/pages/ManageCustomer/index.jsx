@@ -48,28 +48,30 @@ const ManageCustomer = ({state}) => {
                 item
                 xs={12}
             >
-                <Grid
-                    container
-                    direction="column"
-                    alignItems="center"
-                    className="header-profile"
-                    spacing={2}
-                >
-                    <Grid item>
-                        <Avatar src={profilePic} className="profile-pic"/>
+                <Paper>
+                    <Grid
+                        container
+                        direction="column"
+                        alignItems="center"
+                        className="header-profile"
+                        spacing={2}
+                    >
+                        <Grid item>
+                            <Avatar src={profilePic} className="profile-pic"/>
+                        </Grid>
+                        
+                        <Grid item>
+                            <Fab variant="extended" className="profile-name">
+                            {user ? user.name : ""}
+                            </Fab>
+                        </Grid>
+                        <Grid item>
+                        <Typography variant="button">
+                            Aluno
+                            </Typography>
+                        </Grid>
                     </Grid>
-                    
-                    <Grid item>
-                        <Fab variant="extended" className="profile-name">
-                        {user ? user.name : ""}
-                        </Fab>
-                    </Grid>
-                    <Grid item>
-                    <Typography variant="button">
-                        Aluno
-                        </Typography>
-                    </Grid>
-                </Grid>
+                </Paper>
             </Grid>
             <Grid
                 item
